@@ -33,7 +33,7 @@ elif page == "Learning Path":
     st.switch_page("pages/learning_path.py")
 
 # PAGE: HOME
-elif page == "Home" or page.startswith("🏠"):
+elif page == "Home":
     render_hero_section(
         "🤖 AI/ML Learning Hub",
         "Master fundamental ML & Statistics concepts through interactive visualizations"

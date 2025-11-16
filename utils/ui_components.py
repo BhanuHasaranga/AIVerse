@@ -165,187 +165,188 @@ def render_enhanced_sidebar():
     if 'completed_modules' not in st.session_state:
         st.session_state.completed_modules = set()
     
-    # Apply sidebar-specific CSS (dark professional theme)
+    # Apply sidebar-specific CSS (hierarchical navigation style)
     st.markdown("""
         <style>
-        /* Dark professional sidebar matching main content */
+        /* Clean hierarchical sidebar */
         [data-testid="stSidebar"] {
-            background-color: #1a1d23;
-            border-right: 1px solid #2d3139;
+            background-color: #fafbfc;
+            border-right: 1px solid #e1e4e8;
+            padding-top: 0;
         }
         
         [data-testid="stSidebar"] * {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }
         
-        /* Section headers */
-        [data-testid="stSidebar"] h3 {
-            color: #e8eaed;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-            padding-left: 0.75rem;
-            opacity: 0.7;
-        }
-        
-        [data-testid="stSidebar"] h2 {
-            color: #e8eaed !important;
-        }
-        
-        /* Radio buttons styling */
+        /* Hide radio button labels */
         [data-testid="stSidebar"] .stRadio > label {
             display: none;
         }
         
+        /* Navigation items - clean flat style */
         [data-testid="stSidebar"] [role="radiogroup"] label {
-            padding: 0.5rem 0.75rem;
-            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            border-radius: 0;
             font-size: 0.875rem;
-            color: #9ca3af;
-            transition: all 0.2s ease;
+            color: #24292e;
+            transition: all 0.15s ease;
             cursor: pointer;
+            font-weight: 400;
+            border-left: 2px solid transparent;
+            margin: 0;
         }
         
         [data-testid="stSidebar"] [role="radiogroup"] label:hover {
-            background-color: #2d3139;
-            color: #e8eaed;
+            background-color: #f6f8fa;
+            color: #0969da;
         }
         
         [data-testid="stSidebar"] [role="radiogroup"] label[data-checked="true"] {
-            background-color: #667eea;
-            color: white;
+            background-color: #ddf4ff;
+            color: #0969da;
             font-weight: 500;
+            border-left: 2px solid #0969da;
+        }
+        
+        /* Expander styling for sections */
+        [data-testid="stSidebar"] .streamlit-expanderHeader {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #57606a;
+            padding: 0.5rem 1rem;
+            border-radius: 0;
+            background: transparent;
+        }
+        
+        [data-testid="stSidebar"] .streamlit-expanderHeader:hover {
+            background-color: #f6f8fa;
         }
         
         /* Divider lines */
         [data-testid="stSidebar"] hr {
-            margin: 1rem 0;
-            border-color: #2d3139;
+            margin: 0.5rem 0;
+            border-color: #e1e4e8;
         }
         
         /* Progress section */
         [data-testid="stSidebar"] .stProgress {
-            margin-top: 0.5rem;
+            margin: 0.5rem 1rem;
         }
         
         [data-testid="stSidebar"] p {
-            color: #9ca3af;
-            font-size: 0.875rem;
+            color: #57606a;
+            font-size: 0.8125rem;
+            padding-left: 1rem;
         }
         
         /* Caption text */
         [data-testid="stSidebar"] .stCaptionContainer {
-            color: #6b7280 !important;
+            color: #6e7781 !important;
+            padding-left: 1rem;
+            font-size: 0.75rem;
         }
         
-        /* Buttons */
+        /* Buttons - minimal style */
         [data-testid="stSidebar"] button {
             font-size: 0.8125rem;
             border-radius: 6px;
-            border: 1px solid #2d3139;
-            background: #252930;
-            color: #e8eaed;
+            border: 1px solid #d0d7de;
+            background: white;
+            color: #24292e;
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
+            padding: 0.375rem 0.75rem;
         }
         
         [data-testid="stSidebar"] button:hover {
-            background-color: #2d3139;
-            border-color: #3d4149;
+            background-color: #f6f8fa;
+            border-color: #1f2328;
+        }
+        
+        /* Header styling */
+        [data-testid="stSidebar"] h2 {
+            padding-left: 1rem !important;
+            margin-bottom: 0.25rem !important;
         }
         </style>
     """, unsafe_allow_html=True)
     
     # Header - clean and minimal
-    st.sidebar.markdown('<h2 style="color: #e8eaed; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; padding-left: 0.75rem;">AIVerse</h2>', unsafe_allow_html=True)
-    st.sidebar.caption("Interactive Learning Platform")
+    st.sidebar.markdown('<h2 style="color: #24292e; font-size: 1.125rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.25rem;">AIVerse</h2>', unsafe_allow_html=True)
+    st.sidebar.caption("Interactive Learning")
     
     st.sidebar.divider()
     
-    # Quick navigation
-    col1, col2 = st.sidebar.columns(2)
-    with col1:
-        if st.button("Welcome", use_container_width=True, key="sidebar_welcome"):
-            st.switch_page("pages/welcome.py")
-    with col2:
-        if st.button("Learning Path", use_container_width=True, key="sidebar_path"):
-            st.switch_page("pages/learning_path.py")
-    
-    st.sidebar.divider()
-    
-    # Build navigation with clean sections
-    phase1_modules = LEARNING_PATH["phase_1"]["modules"]
-    
-    # Navigation structure
-    st.sidebar.markdown("### Getting Started")
-    main_options = ["Home", "About"]
-    main_selected = st.sidebar.radio(
-        "main_section",
-        main_options,
+    # Top-level navigation
+    main_nav_options = ["Home", "Welcome", "Learning Path", "About"]
+    main_nav_selected = st.sidebar.radio(
+        "main_navigation",
+        main_nav_options,
         label_visibility="collapsed",
         key="nav_main"
     )
     
-    st.sidebar.markdown("### Statistics Foundations")
-    stats_options = []
-    for module in phase1_modules[:4]:
-        is_completed = module.id in st.session_state.completed_modules
-        if is_completed:
-            stats_options.append(f"✓ {module.title}")
-        else:
-            stats_options.append(f"  {module.title}")
+    st.sidebar.divider()
     
-    stats_selected = st.sidebar.radio(
-        "stats_section",
-        stats_options,
-        label_visibility="collapsed",
-        key="nav_stats"
-    )
+    # Build navigation with expanders for hierarchy
+    phase1_modules = LEARNING_PATH["phase_1"]["modules"]
     
-    st.sidebar.markdown("### Distributions & Probability")
-    dist_options = []
-    for module in phase1_modules[4:]:
-        is_completed = module.id in st.session_state.completed_modules
-        if is_completed:
-            dist_options.append(f"✓ {module.title}")
-        else:
-            dist_options.append(f"  {module.title}")
+    # STATISTICS FOUNDATIONS (collapsible section)
+    with st.sidebar.expander("STATISTICS FOUNDATIONS", expanded=True):
+        stats_options = []
+        for module in phase1_modules[:4]:
+            is_completed = module.id in st.session_state.completed_modules
+            if is_completed:
+                stats_options.append(f"✓ {module.title}")
+            else:
+                stats_options.append(module.title)
+        
+        stats_selected = st.radio(
+            "stats_modules",
+            stats_options,
+            label_visibility="collapsed",
+            key="nav_stats"
+        )
     
-    dist_selected = st.sidebar.radio(
-        "dist_section",
-        dist_options,
-        label_visibility="collapsed",
-        key="nav_dist"
-    )
+    # DISTRIBUTIONS & PROBABILITY (collapsible section)
+    with st.sidebar.expander("DISTRIBUTIONS & PROBABILITY", expanded=True):
+        dist_options = []
+        for module in phase1_modules[4:]:
+            is_completed = module.id in st.session_state.completed_modules
+            if is_completed:
+                dist_options.append(f"✓ {module.title}")
+            else:
+                dist_options.append(module.title)
+        
+        dist_selected = st.radio(
+            "dist_modules",
+            dist_options,
+            label_visibility="collapsed",
+            key="nav_dist"
+        )
     
-    # Determine which was selected (check session state for last interaction)
-    if 'last_nav_section' not in st.session_state:
-        st.session_state.last_nav_section = 'main'
-    
-    # Simple selection logic - use the currently selected value from active section
-    selected = main_selected
+    # Determine selected page
+    selected = main_nav_selected
     
     # Footer info with real progress
     st.sidebar.divider()
     total_progress = calculate_total_progress(st.session_state.completed_modules)
-    st.sidebar.markdown("### Your Progress")
-    st.sidebar.progress(total_progress / 100, text=f"{total_progress:.0f}% Complete")
     
-    completed = len(st.session_state.completed_modules)
-    st.sidebar.caption(f"✓ {completed} of 7 modules completed")
+    with st.sidebar.expander("PROGRESS", expanded=False):
+        st.progress(total_progress / 100, text=f"{total_progress:.0f}% Complete")
+        completed = len(st.session_state.completed_modules)
+        st.caption(f"{completed} of 7 modules completed")
     
     # Parse and return clean page name
-    if selected == "Home":
-        return "Home"
-    elif selected == "About":
-        return "About"
-    elif selected.startswith("✓"):
+    if selected in ["Home", "Welcome", "Learning Path", "About"]:
+        return selected
+    elif selected.startswith("✓ "):
         # Format: "✓ Mean Explorer"
         return selected[2:].strip()
     else:
-        # Format: "  Mean Explorer" (with spaces)
+        # Clean module name
         return selected.strip()
 
