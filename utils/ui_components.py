@@ -165,13 +165,13 @@ def render_enhanced_sidebar():
     if 'completed_modules' not in st.session_state:
         st.session_state.completed_modules = set()
     
-    # Apply sidebar-specific CSS (professional documentation style)
+    # Apply sidebar-specific CSS (dark professional theme)
     st.markdown("""
         <style>
-        /* Clean, professional sidebar */
+        /* Dark professional sidebar matching main content */
         [data-testid="stSidebar"] {
-            background-color: #fafbfc;
-            border-right: 1px solid #e1e4e8;
+            background-color: #1a1d23;
+            border-right: 1px solid #2d3139;
         }
         
         [data-testid="stSidebar"] * {
@@ -180,12 +180,19 @@ def render_enhanced_sidebar():
         
         /* Section headers */
         [data-testid="stSidebar"] h3 {
-            color: #24292e;
-            font-size: 0.875rem;
+            color: #e8eaed;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 1.5rem;
             margin-bottom: 0.5rem;
             padding-left: 0.75rem;
+            opacity: 0.7;
+        }
+        
+        [data-testid="stSidebar"] h2 {
+            color: #e8eaed !important;
         }
         
         /* Radio buttons styling */
@@ -197,14 +204,14 @@ def render_enhanced_sidebar():
             padding: 0.5rem 0.75rem;
             border-radius: 6px;
             font-size: 0.875rem;
-            color: #586069;
+            color: #9ca3af;
             transition: all 0.2s ease;
             cursor: pointer;
         }
         
         [data-testid="stSidebar"] [role="radiogroup"] label:hover {
-            background-color: #f3f4f6;
-            color: #24292e;
+            background-color: #2d3139;
+            color: #e8eaed;
         }
         
         [data-testid="stSidebar"] [role="radiogroup"] label[data-checked="true"] {
@@ -216,7 +223,7 @@ def render_enhanced_sidebar():
         /* Divider lines */
         [data-testid="stSidebar"] hr {
             margin: 1rem 0;
-            border-color: #e1e4e8;
+            border-color: #2d3139;
         }
         
         /* Progress section */
@@ -225,30 +232,35 @@ def render_enhanced_sidebar():
         }
         
         [data-testid="stSidebar"] p {
-            color: #586069;
+            color: #9ca3af;
             font-size: 0.875rem;
+        }
+        
+        /* Caption text */
+        [data-testid="stSidebar"] .stCaptionContainer {
+            color: #6b7280 !important;
         }
         
         /* Buttons */
         [data-testid="stSidebar"] button {
             font-size: 0.8125rem;
             border-radius: 6px;
-            border: 1px solid #e1e4e8;
-            background: white;
-            color: #24292e;
+            border: 1px solid #2d3139;
+            background: #252930;
+            color: #e8eaed;
             font-weight: 500;
             transition: all 0.2s ease;
         }
         
         [data-testid="stSidebar"] button:hover {
-            background-color: #f6f8fa;
-            border-color: #d0d7de;
+            background-color: #2d3139;
+            border-color: #3d4149;
         }
         </style>
     """, unsafe_allow_html=True)
     
     # Header - clean and minimal
-    st.sidebar.markdown('<h2 style="color: #24292e; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; padding-left: 0.75rem;">AIVerse</h2>', unsafe_allow_html=True)
+    st.sidebar.markdown('<h2 style="color: #e8eaed; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; padding-left: 0.75rem;">AIVerse</h2>', unsafe_allow_html=True)
     st.sidebar.caption("Interactive Learning Platform")
     
     st.sidebar.divider()
@@ -256,10 +268,10 @@ def render_enhanced_sidebar():
     # Quick navigation
     col1, col2 = st.sidebar.columns(2)
     with col1:
-        if st.button("👋 Welcome", use_container_width=True, key="sidebar_welcome"):
+        if st.button("Welcome", use_container_width=True, key="sidebar_welcome"):
             st.switch_page("pages/welcome.py")
     with col2:
-        if st.button("🗺️ Learning Path", use_container_width=True, key="sidebar_path"):
+        if st.button("Learning Path", use_container_width=True, key="sidebar_path"):
             st.switch_page("pages/learning_path.py")
     
     st.sidebar.divider()
@@ -269,7 +281,7 @@ def render_enhanced_sidebar():
     
     # Navigation structure
     st.sidebar.markdown("### Getting Started")
-    main_options = ["🏠 Home", "ℹ️ About"]
+    main_options = ["Home", "About"]
     main_selected = st.sidebar.radio(
         "main_section",
         main_options,
@@ -326,9 +338,9 @@ def render_enhanced_sidebar():
     st.sidebar.caption(f"✓ {completed} of 7 modules completed")
     
     # Parse and return clean page name
-    if selected.startswith("🏠"):
+    if selected == "Home":
         return "Home"
-    elif selected.startswith("ℹ️"):
+    elif selected == "About":
         return "About"
     elif selected.startswith("✓"):
         # Format: "✓ Mean Explorer"
