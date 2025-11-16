@@ -212,52 +212,36 @@ def render_enhanced_sidebar():
     
     st.sidebar.divider()
     
-    # Navigation sections
-    st.sidebar.markdown('<p class="sidebar-section-title">🏠 MAIN</p>', unsafe_allow_html=True)
-    home_section = st.sidebar.radio(
-        "main_nav",
-        ["Home", "About"],
-        label_visibility="collapsed"
-    )
-    
-    # Get modules from learning path with status
+    # Build navigation options with sections
     phase1_modules = LEARNING_PATH["phase_1"]["modules"]
     
-    st.sidebar.markdown('<p class="sidebar-section-title">📊 STATISTICS FOUNDATIONS</p>', unsafe_allow_html=True)
-    stats_display = []
-    stats_values = []
-    for module in phase1_modules[:4]:  # First 4 modules
+    # Main section
+    nav_options = []
+    nav_options.append("🏠 Home")
+    nav_options.append("ℹ️ About")
+    nav_options.append("---")  # Divider
+    
+    # Statistics Foundation modules
+    for module in phase1_modules[:4]:
         is_completed = module.id in st.session_state.completed_modules
         status = "✅" if is_completed else module.get_difficulty_badge()
-        display_name = f"{status} {module.title}"
-        stats_display.append(display_name)
-        stats_values.append(module.title)
+        nav_options.append(f"{status} {module.title}")
     
-    stats_idx = st.sidebar.radio(
-        "stats_nav",
-        range(len(stats_display)),
-        format_func=lambda x: stats_display[x],
-        label_visibility="collapsed"
-    )
-    stats_section = stats_values[stats_idx]
+    nav_options.append("---")  # Divider
     
-    st.sidebar.markdown('<p class="sidebar-section-title">📈 DISTRIBUTIONS & RELATIONSHIPS</p>', unsafe_allow_html=True)
-    dist_display = []
-    dist_values = []
-    for module in phase1_modules[4:]:  # Last 3 modules
+    # Distribution modules
+    for module in phase1_modules[4:]:
         is_completed = module.id in st.session_state.completed_modules
         status = "✅" if is_completed else module.get_difficulty_badge()
-        display_name = f"{status} {module.title}"
-        dist_display.append(display_name)
-        dist_values.append(module.title)
+        nav_options.append(f"{status} {module.title}")
     
-    dist_idx = st.sidebar.radio(
-        "dist_nav",
-        range(len(dist_display)),
-        format_func=lambda x: dist_display[x],
+    # Single unified navigation
+    st.sidebar.markdown("### Navigation")
+    selected = st.sidebar.radio(
+        "Navigate to:",
+        nav_options,
         label_visibility="collapsed"
     )
-    dist_section = dist_values[dist_idx]
     
     # Footer info with real progress
     st.sidebar.divider()
@@ -268,10 +252,18 @@ def render_enhanced_sidebar():
     completed = len(st.session_state.completed_modules)
     st.sidebar.caption(f"{completed}/7 modules completed")
     
-    # Return selected page (check which section was changed)
-    if home_section != "Home":
-        return home_section
-    
-    # Return the selected module
-    return stats_section if stats_section else dist_section
+    # Parse selected option and return clean page name
+    if selected == "---":
+        return "Home"
+    elif selected.startswith("🏠"):
+        return "Home"
+    elif selected.startswith("ℹ️"):
+        return "About"
+    else:
+        # Remove status emoji and return module name
+        # Format: "✅ Mean Explorer" or "🟢 Mean Explorer"
+        parts = selected.split(" ", 1)
+        if len(parts) > 1:
+            return parts[1]
+        return selected
 
