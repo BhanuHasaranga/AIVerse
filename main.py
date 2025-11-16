@@ -17,7 +17,6 @@ from utils.ui_components import (
 apply_page_config(
     title="AI/ML Learning Hub",
     icon="🤖",
-    layout="wide",
     sidebar_state="expanded"
 )
 apply_theme(page_type="home")
