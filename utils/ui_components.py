@@ -34,7 +34,7 @@ def apply_theme(page_type="page"):
         st.markdown(Theme.get_page_css(), unsafe_allow_html=True)
 
 
-def create_two_column_layout(title, icon=None):
+def create_two_column_layout(title, icon=None, module_id=None):
     """
     Create standard 2.5:1 column layout for explorer pages.
     Similar to: <TwoColumnLayout title="Mean Explorer" />
@@ -42,11 +42,42 @@ def create_two_column_layout(title, icon=None):
     Args:
         title: Page title
         icon: Optional icon (for backward compatibility, not displayed)
+        module_id: Optional module ID for progress tracking
     
     Returns:
         tuple: (left_column, right_column)
     """
-    st.title(title)
+    from utils.learning_path import get_module_by_id
+    
+    # Initialize session state
+    if 'completed_modules' not in st.session_state:
+        st.session_state.completed_modules = set()
+    
+    # Title and completion tracking
+    col_title, col_complete = st.columns([4, 1])
+    
+    with col_title:
+        st.title(title)
+    
+    with col_complete:
+        if module_id:
+            module = get_module_by_id(module_id)
+            if module:
+                is_completed = module_id in st.session_state.completed_modules
+                
+                if is_completed:
+                    st.success("✅ Completed")
+                    if st.button("Mark Incomplete", key=f"uncomplete_{module_id}"):
+                        st.session_state.completed_modules.discard(module_id)
+                        st.rerun()
+                else:
+                    difficulty_badge = module.get_difficulty_badge()
+                    st.info(f"{difficulty_badge} {module.difficulty}")
+                    if st.button("Mark Complete", key=f"complete_{module_id}"):
+                        st.session_state.completed_modules.add(module_id)
+                        st.success("🎉 Great job!")
+                        st.rerun()
+    
     col1, col2 = st.columns([2.5, 1], gap="large")
     return col1, col2
 
@@ -128,6 +159,12 @@ def render_enhanced_sidebar():
     Returns:
         str: Selected page name
     """
+    from utils.learning_path import LEARNING_PATH, calculate_total_progress
+    
+    # Initialize completed modules in session state
+    if 'completed_modules' not in st.session_state:
+        st.session_state.completed_modules = set()
+    
     # Apply sidebar-specific CSS
     st.markdown("""
         <style>
@@ -143,11 +180,6 @@ def render_enhanced_sidebar():
         [data-testid="stSidebar"] h3 {
             color: white !important;
         }
-        .sidebar-section {
-            margin: 1.5rem 0;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
         .sidebar-section-title {
             font-size: 0.85rem;
             font-weight: 600;
@@ -156,12 +188,28 @@ def render_enhanced_sidebar():
             color: rgba(255,255,255,0.7) !important;
             margin-bottom: 0.5rem;
         }
+        .module-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
         </style>
     """, unsafe_allow_html=True)
     
     # Header
-    st.sidebar.markdown("# 🤖 AI/ML Hub")
+    st.sidebar.markdown("# 🤖 AIVerse")
     st.sidebar.markdown("*Interactive Learning Platform*")
+    st.sidebar.divider()
+    
+    # Quick access buttons
+    col1, col2 = st.sidebar.columns(2)
+    with col1:
+        if st.button("👋 Welcome", use_container_width=True, key="sidebar_welcome"):
+            st.switch_page("pages/welcome.py")
+    with col2:
+        if st.button("🗺️ Path", use_container_width=True, key="sidebar_path"):
+            st.switch_page("pages/learning_path.py")
+    
     st.sidebar.divider()
     
     # Navigation sections
@@ -172,43 +220,58 @@ def render_enhanced_sidebar():
         label_visibility="collapsed"
     )
     
+    # Get modules from learning path with status
+    phase1_modules = LEARNING_PATH["phase_1"]["modules"]
+    
     st.sidebar.markdown('<p class="sidebar-section-title">📊 STATISTICS FOUNDATIONS</p>', unsafe_allow_html=True)
-    stats_modules = [
-        "Mean Explorer",
-        "Median Explorer", 
-        "Mode Explorer",
-        "Variance Visualizer"
-    ]
-    stats_section = st.sidebar.radio(
+    stats_display = []
+    stats_values = []
+    for module in phase1_modules[:4]:  # First 4 modules
+        is_completed = module.id in st.session_state.completed_modules
+        status = "✅" if is_completed else module.get_difficulty_badge()
+        display_name = f"{status} {module.title}"
+        stats_display.append(display_name)
+        stats_values.append(module.title)
+    
+    stats_idx = st.sidebar.radio(
         "stats_nav",
-        stats_modules,
+        range(len(stats_display)),
+        format_func=lambda x: stats_display[x],
         label_visibility="collapsed"
     )
+    stats_section = stats_values[stats_idx]
     
     st.sidebar.markdown('<p class="sidebar-section-title">📈 DISTRIBUTIONS & RELATIONSHIPS</p>', unsafe_allow_html=True)
-    dist_modules = [
-        "Distribution Explorer",
-        "Correlation Explorer",
-        "Probability Explorer"
-    ]
-    dist_section = st.sidebar.radio(
+    dist_display = []
+    dist_values = []
+    for module in phase1_modules[4:]:  # Last 3 modules
+        is_completed = module.id in st.session_state.completed_modules
+        status = "✅" if is_completed else module.get_difficulty_badge()
+        display_name = f"{status} {module.title}"
+        dist_display.append(display_name)
+        dist_values.append(module.title)
+    
+    dist_idx = st.sidebar.radio(
         "dist_nav",
-        dist_modules,
+        range(len(dist_display)),
+        format_func=lambda x: dist_display[x],
         label_visibility="collapsed"
     )
+    dist_section = dist_values[dist_idx]
     
-    # Footer info
+    # Footer info with real progress
     st.sidebar.divider()
-    st.sidebar.markdown("### 📚 Progress")
-    st.sidebar.progress(0.30, text="Phase 1: 30% Complete")
-    st.sidebar.caption("7 modules | 3 phases planned")
+    total_progress = calculate_total_progress(st.session_state.completed_modules)
+    st.sidebar.markdown("### 📚 Your Progress")
+    st.sidebar.progress(total_progress / 100, text=f"Overall: {total_progress:.0f}%")
+    
+    completed = len(st.session_state.completed_modules)
+    st.sidebar.caption(f"{completed}/7 modules completed")
     
     # Return selected page (check which section was changed)
     if home_section != "Home":
         return home_section
     
-    # Check if user selected from stats or dist sections
-    # The most recently selected item will be returned
-    # This is a simplified approach - in production you'd track state better
+    # Return the selected module
     return stats_section if stats_section else dist_section
 

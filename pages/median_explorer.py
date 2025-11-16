@@ -13,7 +13,7 @@ apply_page_config(title="Median Explorer", icon="")
 apply_theme(page_type="page")
 
 # Create layout
-col1, col2 = create_two_column_layout("Median Explorer", "")
+col1, col2 = create_two_column_layout("Median Explorer", module_id="median")
 
 # LEFT COLUMN
 with col1:

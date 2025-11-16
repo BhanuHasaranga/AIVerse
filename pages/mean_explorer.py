@@ -13,8 +13,8 @@ import pandas as pd
 apply_page_config(title="Mean Explorer", icon="📊")
 apply_theme(page_type="page")
 
-# Create layout
-col1, col2 = create_two_column_layout("Mean Explorer")
+# Create layout with progress tracking
+col1, col2 = create_two_column_layout("Mean Explorer", module_id="mean")
 
 # LEFT COLUMN - Interactive explorer
 with col1:

@@ -14,7 +14,7 @@ apply_page_config(title="Mode Explorer", icon="👑")
 apply_theme(page_type="page")
 
 # Create layout
-col1, col2 = create_two_column_layout("Mode Explorer", "👑")
+col1, col2 = create_two_column_layout("Mode Explorer", module_id="mode")
 
 # LEFT COLUMN
 with col1:

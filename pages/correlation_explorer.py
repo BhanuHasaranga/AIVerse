@@ -13,7 +13,7 @@ apply_page_config(title="Correlation Explorer", icon="")
 apply_theme(page_type="page")
 
 # Create layout
-col1, col2 = create_two_column_layout("Correlation & Covariance Explorer", "")
+col1, col2 = create_two_column_layout("Correlation & Covariance Explorer", module_id="correlation")
 
 # LEFT COLUMN
 with col1:

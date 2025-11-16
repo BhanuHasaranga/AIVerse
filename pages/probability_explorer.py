@@ -15,7 +15,7 @@ apply_page_config(title="Probability Explorer", icon="")
 apply_theme(page_type="page")
 
 # Create layout
-col1, col2 = create_two_column_layout("Probability Explorer", "")
+col1, col2 = create_two_column_layout("Probability Explorer", module_id="probability")
 
 # LEFT COLUMN
 with col1:

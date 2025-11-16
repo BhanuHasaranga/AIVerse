@@ -25,8 +25,16 @@ apply_theme(page_type="home")
 # Render enhanced sidebar navigation
 page = render_enhanced_sidebar()
 
+# PAGE: WELCOME
+if page == "Welcome":
+    st.switch_page("pages/welcome.py")
+
+# PAGE: LEARNING PATH
+elif page == "Learning Path":
+    st.switch_page("pages/learning_path.py")
+
 # PAGE: HOME
-if page == "Home":
+elif page == "Home":
     render_hero_section(
         "🤖 AI/ML Learning Hub",
         "Master fundamental ML & Statistics concepts through interactive visualizations"
