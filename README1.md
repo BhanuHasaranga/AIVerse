@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🤖 AI/ML Learning Hub
 
 An interactive educational web application for learning fundamental statistics and machine learning concepts through hands-on visualizations.
@@ -173,3 +174,7 @@ For questions or feedback, open an issue on GitHub.
 
 Built with ❤️ for the AI/ML learning community
 
+=======
+# AIVerse
+Interactive AI/ML learning platform with hands-on visualizations and simulations. Master statistics, machine learning, and AI concepts through beautiful, beginner-friendly explorers. Built with Streamlit &amp; Python.
+>>>>>>> cda480b8f7e0eb61b329cddf75809439a6308fa0
