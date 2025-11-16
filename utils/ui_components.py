@@ -165,105 +165,175 @@ def render_enhanced_sidebar():
     if 'completed_modules' not in st.session_state:
         st.session_state.completed_modules = set()
     
-    # Apply sidebar-specific CSS
+    # Apply sidebar-specific CSS (professional documentation style)
     st.markdown("""
         <style>
+        /* Clean, professional sidebar */
         [data-testid="stSidebar"] {
-            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            background-color: #fafbfc;
+            border-right: 1px solid #e1e4e8;
         }
-        [data-testid="stSidebar"] .css-1d391kg, 
-        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {
-            color: white !important;
+        
+        [data-testid="stSidebar"] * {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }
-        [data-testid="stSidebar"] h1, 
-        [data-testid="stSidebar"] h2, 
+        
+        /* Section headers */
         [data-testid="stSidebar"] h3 {
-            color: white !important;
-        }
-        .sidebar-section-title {
-            font-size: 0.85rem;
+            color: #24292e;
+            font-size: 0.875rem;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: rgba(255,255,255,0.7) !important;
+            margin-top: 1rem;
             margin-bottom: 0.5rem;
+            padding-left: 0.75rem;
         }
-        .module-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        
+        /* Radio buttons styling */
+        [data-testid="stSidebar"] .stRadio > label {
+            display: none;
+        }
+        
+        [data-testid="stSidebar"] [role="radiogroup"] label {
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: #586069;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        [data-testid="stSidebar"] [role="radiogroup"] label:hover {
+            background-color: #f3f4f6;
+            color: #24292e;
+        }
+        
+        [data-testid="stSidebar"] [role="radiogroup"] label[data-checked="true"] {
+            background-color: #667eea;
+            color: white;
+            font-weight: 500;
+        }
+        
+        /* Divider lines */
+        [data-testid="stSidebar"] hr {
+            margin: 1rem 0;
+            border-color: #e1e4e8;
+        }
+        
+        /* Progress section */
+        [data-testid="stSidebar"] .stProgress {
+            margin-top: 0.5rem;
+        }
+        
+        [data-testid="stSidebar"] p {
+            color: #586069;
+            font-size: 0.875rem;
+        }
+        
+        /* Buttons */
+        [data-testid="stSidebar"] button {
+            font-size: 0.8125rem;
+            border-radius: 6px;
+            border: 1px solid #e1e4e8;
+            background: white;
+            color: #24292e;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        [data-testid="stSidebar"] button:hover {
+            background-color: #f6f8fa;
+            border-color: #d0d7de;
         }
         </style>
     """, unsafe_allow_html=True)
     
-    # Header
-    st.sidebar.markdown("# 🤖 AIVerse")
-    st.sidebar.markdown("*Interactive Learning Platform*")
+    # Header - clean and minimal
+    st.sidebar.markdown('<h2 style="color: #24292e; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; padding-left: 0.75rem;">AIVerse</h2>', unsafe_allow_html=True)
+    st.sidebar.caption("Interactive Learning Platform")
+    
     st.sidebar.divider()
     
-    # Quick access buttons
+    # Quick navigation
     col1, col2 = st.sidebar.columns(2)
     with col1:
         if st.button("👋 Welcome", use_container_width=True, key="sidebar_welcome"):
             st.switch_page("pages/welcome.py")
     with col2:
-        if st.button("🗺️ Path", use_container_width=True, key="sidebar_path"):
+        if st.button("🗺️ Learning Path", use_container_width=True, key="sidebar_path"):
             st.switch_page("pages/learning_path.py")
     
     st.sidebar.divider()
     
-    # Build navigation options with sections
+    # Build navigation with clean sections
     phase1_modules = LEARNING_PATH["phase_1"]["modules"]
     
-    # Main section
-    nav_options = []
-    nav_options.append("🏠 Home")
-    nav_options.append("ℹ️ About")
-    nav_options.append("---")  # Divider
+    # Navigation structure
+    st.sidebar.markdown("### Getting Started")
+    main_options = ["🏠 Home", "ℹ️ About"]
+    main_selected = st.sidebar.radio(
+        "main_section",
+        main_options,
+        label_visibility="collapsed",
+        key="nav_main"
+    )
     
-    # Statistics Foundation modules
+    st.sidebar.markdown("### Statistics Foundations")
+    stats_options = []
     for module in phase1_modules[:4]:
         is_completed = module.id in st.session_state.completed_modules
-        status = "✅" if is_completed else module.get_difficulty_badge()
-        nav_options.append(f"{status} {module.title}")
+        if is_completed:
+            stats_options.append(f"✓ {module.title}")
+        else:
+            stats_options.append(f"  {module.title}")
     
-    nav_options.append("---")  # Divider
+    stats_selected = st.sidebar.radio(
+        "stats_section",
+        stats_options,
+        label_visibility="collapsed",
+        key="nav_stats"
+    )
     
-    # Distribution modules
+    st.sidebar.markdown("### Distributions & Probability")
+    dist_options = []
     for module in phase1_modules[4:]:
         is_completed = module.id in st.session_state.completed_modules
-        status = "✅" if is_completed else module.get_difficulty_badge()
-        nav_options.append(f"{status} {module.title}")
+        if is_completed:
+            dist_options.append(f"✓ {module.title}")
+        else:
+            dist_options.append(f"  {module.title}")
     
-    # Single unified navigation
-    st.sidebar.markdown("### Navigation")
-    selected = st.sidebar.radio(
-        "Navigate to:",
-        nav_options,
-        label_visibility="collapsed"
+    dist_selected = st.sidebar.radio(
+        "dist_section",
+        dist_options,
+        label_visibility="collapsed",
+        key="nav_dist"
     )
+    
+    # Determine which was selected (check session state for last interaction)
+    if 'last_nav_section' not in st.session_state:
+        st.session_state.last_nav_section = 'main'
+    
+    # Simple selection logic - use the currently selected value from active section
+    selected = main_selected
     
     # Footer info with real progress
     st.sidebar.divider()
     total_progress = calculate_total_progress(st.session_state.completed_modules)
-    st.sidebar.markdown("### 📚 Your Progress")
-    st.sidebar.progress(total_progress / 100, text=f"Overall: {total_progress:.0f}%")
+    st.sidebar.markdown("### Your Progress")
+    st.sidebar.progress(total_progress / 100, text=f"{total_progress:.0f}% Complete")
     
     completed = len(st.session_state.completed_modules)
-    st.sidebar.caption(f"{completed}/7 modules completed")
+    st.sidebar.caption(f"✓ {completed} of 7 modules completed")
     
-    # Parse selected option and return clean page name
-    if selected == "---":
-        return "Home"
-    elif selected.startswith("🏠"):
+    # Parse and return clean page name
+    if selected.startswith("🏠"):
         return "Home"
     elif selected.startswith("ℹ️"):
         return "About"
+    elif selected.startswith("✓"):
+        # Format: "✓ Mean Explorer"
+        return selected[2:].strip()
     else:
-        # Remove status emoji and return module name
-        # Format: "✅ Mean Explorer" or "🟢 Mean Explorer"
-        parts = selected.split(" ", 1)
-        if len(parts) > 1:
-            return parts[1]
-        return selected
+        # Format: "  Mean Explorer" (with spaces)
+        return selected.strip()
 
