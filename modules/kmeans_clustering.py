@@ -31,7 +31,6 @@ def main():
             n_samples = st.slider("Number of samples", 50, 500, 200)
             
             if dataset_type == "Blobs (Clusters)":
-                n_features = st.slider("Number of features", 2, 2, 2)
                 n_true_clusters = st.slider("True number of clusters", 2, 8, 3)
                 cluster_std = st.slider("Cluster spread", 0.1, 3.0, 1.0, 0.1)
                 
