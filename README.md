@@ -2,57 +2,153 @@
 
 <div align="center">
 
-**Interactive AI & Machine Learning Learning Platform**
+**Explore the Universe of AI — From Zero to AI Engineer**
 
 [![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python&logoColor=white)](https://python.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.51-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/BhanuHasaranga/AIVerse?style=social)](https://github.com/BhanuHasaranga/AIVerse/stargazers)
 
-*Master AI concepts through beautiful visualizations and hands-on exploration*
+*Interactive AI/ML learning platform with hands-on visualizations and simulations.*  
+*Master statistics, machine learning, and AI concepts through beautiful, beginner-friendly explorers.*
 
-[🚀 Get Started](#quick-start) • [📖 Documentation](#features) • [🗺️ Roadmap](#roadmap)
+[🚀 Live Demo](#) • [📖 Documentation](#features) • [🎯 Roadmap](#roadmap) • [🤝 Contributing](#contributing)
 
 </div>
 
 ---
 
-## 💡 **What is AIVerse?**
+## 🎯 **Vision**
 
-AIVerse transforms complex AI and machine learning concepts into interactive, visual experiences. Instead of reading about algorithms, you **interact** with them. Adjust parameters, upload data, and watch mathematical concepts come alive through real-time visualizations.
+**AIVerse** is not just another learning platform — it's a complete interactive environment where you **see** how AI works, not just read about it.
 
-**Perfect for:**
-- 🎓 Students learning ML fundamentals
-- 💻 Developers transitioning to AI
-- 👨‍🏫 Educators teaching data science
-- 🚀 Anyone curious about how AI really works
+Think of it as:
+- 🔹 **Khan Academy** for Machine Learning
+- 🔹 **3Blue1Brown-style** visual intuition
+- 🔹 **Playground-style** interactive experiments
+- 🔹 **All-in-one** AI learning ecosystem
+
+**Our Mission:** Take someone from **zero → AI engineer** using visualizations, simulations, and intuitive explanations.
 
 ---
 
-## ✨ **Current Features**
+## ✨ **Why AIVerse?**
 
-### **Statistics Foundations**
+The biggest pain point in learning AI/ML is:
 
-| Explorer | What You'll Learn |
-|----------|-------------------|
-| **📊 Mean Explorer** | Calculate and visualize averages with multiple data input methods |
-| **📈 Median Explorer** | Understand central tendency and outlier resistance |
-| **👑 Mode Explorer** | Analyze frequency distributions for numeric and categorical data |
-| **📉 Variance Visualizer** | Explore data spread and standard deviation |
-| **🔔 Distribution Explorer** | Visualize probability distributions and data patterns |
-| **🔗 Correlation Explorer** | Discover relationships between variables with scatter plots |
+> 👉 **People don't understand what's happening under the hood.**
 
-### **What Makes It Special**
+**AIVerse solves that.**
 
-✅ **Multiple Input Methods** - Generate random data, upload CSV files, or enter values manually  
-✅ **Step-by-Step Math** - See calculations broken down with clear explanations and LaTeX formulas  
-✅ **Real-World Context** - Learn how each concept applies to actual ML problems  
-✅ **Interactive Charts** - Drag, zoom, and explore with Plotly visualizations  
-✅ **Theory & Practice** - Each explorer includes definitions, examples, and ML applications  
+Instead of passive reading, you:
+- ✅ **Manipulate values** and see results in real-time
+- ✅ **Drag graphs** and watch algorithms respond
+- ✅ **Click buttons** to trigger simulations
+- ✅ **Visualize math** with interactive charts
+- ✅ **Learn by doing** — not memorizing
+
+---
+
+## 🚀 **Features**
+
+### **📊 Current Modules (Week 1: Statistics Foundations)**
+
+| Module | Description | Status |
+|--------|-------------|--------|
+| **📊 Mean Explorer** | Understand averages with interactive histograms | ✅ Live |
+| **📈 Median Explorer** | Learn central values and outlier resistance | ✅ Live |
+| **👑 Mode Explorer** | Find most frequent values (numeric & categorical) | ✅ Live |
+| **📉 Variance Visualizer** | Explore data spread and standard deviation | ✅ Live |
+| **🔔 Distribution Visualizer** | Probability distributions and skewness | ✅ Live |
+| **🔗 Correlation Explorer** | Analyze relationships with scatter plots | ✅ Live |
+
+### **🎨 What Makes Each Module Special**
+
+- **Multiple Input Methods:** Generate random data, upload CSV, or enter manually
+- **Step-by-Step Calculations:** See the math broken down with LaTeX formulas
+- **Real-World Examples:** Understand practical applications
+- **ML Context:** Learn how each concept is used in AI/ML
+- **Beautiful Visualizations:** Powered by Plotly for interactive charts
+- **Theory Panels:** Tabbed learning guides (Definition, Examples, ML Usage, Summary)
+
+---
+
+## 🗺️ **Roadmap: The Complete AI Learning Journey**
+
+### **Phase 1: Foundations** ✅ *Complete*
+- [x] Statistics fundamentals (mean, median, mode, variance)
+- [x] Correlation & covariance
+- [x] Probability distributions
+
+### **Phase 2: Machine Learning Basics** 🚧 *In Progress*
+- [ ] Linear Regression visualizer
+- [ ] Logistic Regression explorer
+- [ ] KNN algorithm simulator
+- [ ] Decision Trees interactive builder
+- [ ] SVM boundary visualizer
+- [ ] Clustering (K-Means, DBSCAN)
+
+### **Phase 3: Deep Learning** 📅 *Coming Soon*
+- [ ] Neural Network playground
+- [ ] Activation functions visualizer
+- [ ] Backpropagation step-by-step
+- [ ] CNN filters & feature maps
+- [ ] RNN/LSTM animations
+- [ ] Transfer Learning demos
+
+### **Phase 4: Transformers & Modern AI** 🔮 *Future*
+- [ ] Attention mechanism visualizer
+- [ ] Multi-head attention flows
+- [ ] Transformer architecture explorer
+- [ ] Positional encoding animations
+- [ ] Token embeddings playground
+- [ ] BERT/GPT architecture breakdown
+
+### **Phase 5: Advanced Topics** 💫 *Vision*
+- [ ] GANs visualizer
+- [ ] Reinforcement Learning gym
+- [ ] Computer Vision playground
+- [ ] NLP tokenization explorer
+- [ ] Model interpretability tools
+- [ ] Training dynamics simulator
+
+---
+
+## 🏗️ **Architecture**
+
+Built with a **React-like component architecture** for maximum reusability and maintainability.
+
+```
+AIVerse/
+├── 🎨 utils/theme.py              # Centralized styling (like styled-components)
+├── 📦 utils/ui_components.py      # Reusable UI components
+├── 📥 utils/data_components.py    # Data input/display components
+├── 📊 utils/chart_components.py   # Visualization wrappers
+├── 🧮 utils/math_utils.py         # Mathematical functions
+└── 🔧 utils/data_utils.py         # Utility functions
+
+pages/
+├── 📊 mean_explorer.py            # Mean calculation & visualization
+├── 📈 median_explorer.py          # Median with outlier analysis
+├── 👑 mode_explorer.py            # Frequency analysis
+├── 📉 variance_visualizer.py      # Variance & std deviation
+├── 🔔 distribution_visualizer.py  # Probability distributions
+└── 🔗 correlation_explorer.py     # Correlation & covariance
+```
+
+**Key Benefits:**
+- ✅ **40% less code** through reusable components
+- ✅ **Zero duplication** — write once, use everywhere
+- ✅ **Easy theme changes** — modify styling in one place
+- ✅ **Production-ready** — professional architecture
 
 ---
 
 ## 🚀 **Quick Start**
+
+### **Prerequisites**
+- Python 3.13+
+- pip package manager
 
 ### **Installation**
 
@@ -61,129 +157,170 @@ AIVerse transforms complex AI and machine learning concepts into interactive, vi
 git clone https://github.com/BhanuHasaranga/AIVerse.git
 cd AIVerse
 
-# Create and activate virtual environment
+# Create virtual environment
 python -m venv venv
 
-# Windows
+# Activate virtual environment
+# Windows:
 venv\Scripts\activate
-
-# macOS/Linux
+# macOS/Linux:
 source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Launch the app
+# Run the app
 streamlit run main.py
 ```
 
-Open your browser to `http://localhost:8501` and start exploring!
+The app will open at `http://localhost:8501`
 
 ---
 
-## 🗺️ **Roadmap**
+## 📸 **Screenshots**
 
-AIVerse is designed to grow into a comprehensive AI learning ecosystem. Here's what's planned:
+### **Home Page**
+*Beautiful landing page with module cards*
 
-### **✅ Phase 1: Statistics Fundamentals** (Current)
-Core statistical concepts with interactive visualizations
+### **Interactive Explorers**
+*Side-by-side layout: visualization + theory*
 
-### **🚧 Phase 2: Machine Learning Algorithms** (Next)
-- Linear & Logistic Regression
-- K-Nearest Neighbors (KNN)
-- Support Vector Machines (SVM)
-- Decision Trees & Random Forests
-- Clustering Algorithms
+### **Step-by-Step Calculations**
+*Math broken down with LaTeX formulas*
 
-### **📅 Phase 3: Deep Learning**
-- Neural Network Architecture
-- Convolutional Neural Networks (CNNs)
-- Recurrent Neural Networks (RNNs)
-- Training Dynamics & Optimization
-
-### **🔮 Phase 4: Advanced Topics**
-- Transformer Architecture
-- Attention Mechanisms
-- Natural Language Processing
-- Computer Vision Applications
-
----
-
-## 🎨 **Built with Modern Architecture**
-
-AIVerse uses a **component-based architecture** inspired by modern web frameworks:
-
-```
-📦 Reusable Components
-├── 🎨 Theme System (centralized styling)
-├── 📦 UI Components (layouts, cards, panels)
-├── 📥 Data Components (input forms, displays)
-└── 📊 Chart Components (visualization wrappers)
-```
-
-**Benefits:**
-- Clean, maintainable codebase
-- Consistent user experience
-- Easy to extend with new modules
-- 40% less code through component reuse
+> 📷 *Screenshots coming soon! Run the app to see it in action.*
 
 ---
 
 ## 🛠️ **Tech Stack**
 
-- **[Streamlit](https://streamlit.io)** - Rapid web app development
-- **[Plotly](https://plotly.com)** - Interactive visualizations
-- **[NumPy](https://numpy.org)** - Numerical computing
-- **[Pandas](https://pandas.pydata.org)** - Data manipulation
-- **Python 3.13+** - Core language
+| Technology | Purpose |
+|------------|---------|
+| **Streamlit** | Web framework for rapid prototyping |
+| **Plotly** | Interactive visualizations |
+| **NumPy** | Numerical computing |
+| **Pandas** | Data manipulation |
+| **Python 3.13** | Core programming language |
+
+**Design Philosophy:**
+- 🎨 **Component-based architecture** (inspired by React)
+- 🎯 **DRY principles** (Don't Repeat Yourself)
+- 📦 **Modular design** for easy extensibility
+- 🚀 **Production-ready** code quality
 
 ---
 
-## 📸 **Preview**
+## 🎓 **Who Is This For?**
 
-> *Screenshots and demo GIF coming soon!*
+### **👨‍🎓 Students**
+Perfect for:
+- Learning ML fundamentals
+- Understanding math concepts visually
+- Preparing for exams or interviews
+- Building intuition before diving into code
 
-Run the app locally to see it in action:
-```bash
-streamlit run main.py
-```
+### **👨‍💻 Developers**
+Great for:
+- Transitioning to AI/ML career
+- Refreshing statistics knowledge
+- Understanding ML algorithms deeply
+- Building portfolio projects
+
+### **👨‍🏫 Educators**
+Useful for:
+- Teaching ML concepts interactively
+- Creating engaging classroom demos
+- Explaining complex topics visually
+- Supplementing traditional textbooks
+
+### **🚀 Career Switchers**
+Ideal for:
+- Learning AI from scratch
+- Building foundational knowledge
+- Getting hands-on practice
+- Understanding industry applications
 
 ---
 
 ## 🤝 **Contributing**
 
-Contributions are welcome! Whether you want to:
-- 🐛 Report bugs
-- 💡 Suggest new features
-- 📝 Improve documentation
-- 🔧 Submit code improvements
+We welcome contributions! Here's how you can help:
 
-Please feel free to open an issue or submit a pull request.
+### **Ways to Contribute**
 
-### **Development**
+1. **🐛 Report Bugs**
+   - Open an issue with detailed description
+   - Include screenshots if applicable
+
+2. **💡 Suggest Features**
+   - Propose new modules or improvements
+   - Share your learning journey feedback
+
+3. **📝 Improve Documentation**
+   - Fix typos or unclear explanations
+   - Add more examples or use cases
+
+4. **🔧 Submit Code**
+   - Fork the repository
+   - Create a feature branch
+   - Submit a pull request
+
+### **Development Setup**
 
 ```bash
-# Fork the repo and clone your fork
+# Fork and clone your fork
 git clone https://github.com/YOUR-USERNAME/AIVerse.git
 
 # Create a feature branch
-git checkout -b feature/your-feature-name
+git checkout -b feature/amazing-feature
 
 # Make your changes and commit
-git commit -m "feat: add your feature"
+git commit -m "feat: add amazing feature"
 
-# Push and create a pull request
-git push origin feature/your-feature-name
+# Push to your fork
+git push origin feature/amazing-feature
+
+# Open a Pull Request
 ```
+
+### **Code Style**
+- Follow existing component patterns
+- Use descriptive variable names
+- Add docstrings to functions
+- Keep functions focused and small
+- Use type hints where possible
 
 ---
 
-## 📊 **Project Stats**
+## 📊 **Project Status**
 
-- **6** Interactive Learning Modules
-- **40%** Code Reduction through Components
-- **0** Code Duplication
-- **Production-Ready** Architecture
+| Metric | Value |
+|--------|-------|
+| **Modules Live** | 6 |
+| **Code Quality** | Production-ready |
+| **Architecture** | React-like components |
+| **Code Reduction** | 40% less than original |
+| **Duplication** | Zero |
+| **Test Coverage** | Coming soon |
+
+---
+
+## 🌟 **What's Next?**
+
+### **Immediate Goals**
+- [ ] Add Linear Regression module
+- [ ] Create KNN visualizer
+- [ ] Build Decision Tree simulator
+- [ ] Add unit tests
+- [ ] Deploy to Streamlit Cloud
+
+### **Long-term Vision**
+Transform AIVerse into:
+- 🎯 The **go-to** interactive AI learning platform
+- 📚 A complete learning **curriculum** from basics to advanced
+- 🏆 A **portfolio-defining** project
+- 🌍 A **viral** educational tool
+- 💼 A potential **SaaS** platform
 
 ---
 
@@ -193,18 +330,30 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🙏 **Acknowledgments**
+## 💖 **Acknowledgments**
 
-Built with inspiration from educational platforms that make learning accessible and engaging.
+Inspired by:
+- **3Blue1Brown** for visual intuition
+- **Khan Academy** for accessible education
+- **Distill.pub** for interactive explanations
+- **Streamlit** for making beautiful apps easy
+
+---
+
+## 📬 **Connect**
+
+- **GitHub:** [@BhanuHasaranga](https://github.com/BhanuHasaranga)
+- **Project Link:** [https://github.com/BhanuHasaranga/AIVerse](https://github.com/BhanuHasaranga/AIVerse)
 
 ---
 
 <div align="center">
 
-**⭐ Star this repo if you find it helpful! ⭐**
+**⭐ If you find AIVerse helpful, give it a star! ⭐**
 
-Made with ❤️ for the AI learning community
+*Built with ❤️ for the AI learning community*
 
-[Report Bug](https://github.com/BhanuHasaranga/AIVerse/issues) • [Request Feature](https://github.com/BhanuHasaranga/AIVerse/issues) • [View Demo](#)
+**[🚀 Start Learning](https://github.com/BhanuHasaranga/AIVerse) • [⭐ Star This Repo](https://github.com/BhanuHasaranga/AIVerse) • [🐛 Report Bug](https://github.com/BhanuHasaranga/AIVerse/issues)**
 
 </div>
+
