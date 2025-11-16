@@ -28,6 +28,7 @@ page = st.sidebar.radio(
         "📉 Variance Visualizer",
         "🔔 Distribution Visualizer",
         "🔗 Correlation Explorer",
+        "🎲 Probability Explorer",
         "ℹ️ About"
     ]
 )
@@ -112,6 +113,20 @@ if page == "🏠 Home":
             icon="🔗"
         )
     
+    # Add Probability Explorer
+    st.write("")
+    col7, col_spacer = st.columns([1, 1])
+    
+    with col7:
+        render_module_card(
+            title="Probability Explorer",
+            description="Master probability fundamentals, conditional probability, Bayes' theorem, and random variables with interactive simulations.",
+            topics="Probability, Bayes, Conditional, Random Variables",
+            button_text="🎲 Start Probability Explorer",
+            page_path="pages/probability_explorer.py",
+            icon="🎲"
+        )
+    
     st.divider()
     
     st.subheader("🎯 How to Use This Platform")
@@ -146,6 +161,10 @@ elif page == "🔔 Distribution Visualizer":
 # PAGE: CORRELATION EXPLORER
 elif page == "🔗 Correlation Explorer":
     st.switch_page("pages/correlation_explorer.py")
+
+# PAGE: PROBABILITY EXPLORER
+elif page == "🎲 Probability Explorer":
+    st.switch_page("pages/probability_explorer.py")
 
 # PAGE: ABOUT
 elif page == "ℹ️ About":

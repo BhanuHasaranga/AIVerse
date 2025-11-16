@@ -61,6 +61,7 @@ Instead of passive reading, you:
 | **📉 Variance Visualizer** | Explore data spread and standard deviation | ✅ Live |
 | **🔔 Distribution Visualizer** | Probability distributions and skewness | ✅ Live |
 | **🔗 Correlation Explorer** | Analyze relationships with scatter plots | ✅ Live |
+| **🎲 Probability Explorer** | Master probability, Bayes' theorem, and random variables | ✅ Live |
 
 ### **🎨 What Makes Each Module Special**
 
@@ -79,6 +80,8 @@ Instead of passive reading, you:
 - [x] Statistics fundamentals (mean, median, mode, variance)
 - [x] Correlation & covariance
 - [x] Probability distributions
+- [x] Probability theory (basics, conditional, Bayes' theorem)
+- [x] Random variables (discrete & continuous distributions)
 
 ### **Phase 2: Machine Learning Basics** 🚧 *In Progress*
 - [ ] Linear Regression visualizer
@@ -296,7 +299,7 @@ git push origin feature/amazing-feature
 
 | Metric | Value |
 |--------|-------|
-| **Modules Live** | 6 |
+| **Modules Live** | 7 |
 | **Code Quality** | Production-ready |
 | **Architecture** | React-like components |
 | **Code Reduction** | 40% less than original |
