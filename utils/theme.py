@@ -28,6 +28,11 @@ class Theme:
         """CSS for individual explorer pages"""
         return f"""
         <style>
+        /* Hide Streamlit default navigation */
+        [data-testid="stSidebarNav"] {{
+            display: none;
+        }}
+        
         .main {{
             max-width: 100%;
             padding-top: 1rem;
@@ -54,6 +59,11 @@ class Theme:
         """CSS for home/landing page"""
         return f"""
         <style>
+        /* Hide Streamlit default navigation */
+        [data-testid="stSidebarNav"] {{
+            display: none;
+        }}
+        
         .main {{
             padding-top: 2rem;
         }}
