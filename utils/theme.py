@@ -30,8 +30,16 @@ class Theme:
         <style>
         .main {{
             max-width: 100%;
+            padding-top: 1rem;
             padding-left: {Theme.PADDING_PAGE};
             padding-right: {Theme.PADDING_PAGE};
+        }}
+        .block-container {{
+            padding-top: 2rem !important;
+        }}
+        h1 {{
+            margin-top: 0 !important;
+            padding-top: 0 !important;
         }}
         [data-testid="stMetricContainer"] {{
             background-color: {Theme.METRIC_BG};
