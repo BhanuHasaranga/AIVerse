@@ -3,14 +3,17 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import streamlit as st
-from utils.ui_components import apply_page_config, apply_theme, create_two_column_layout, render_theory_panel
+from utils.ui_components import apply_page_config, apply_theme, create_two_column_layout, render_theory_panel, render_enhanced_sidebar
 from utils.chart_components import render_scatter_with_regression
 import pandas as pd
 import numpy as np
 
 # Apply theme
-apply_page_config(title="Correlation Explorer", icon="")
+apply_page_config(title="Correlation Explorer", icon="", sidebar_state="expanded")
 apply_theme(page_type="page")
+
+# Render sidebar
+render_enhanced_sidebar()
 
 # Create layout
 col1, col2 = create_two_column_layout("Correlation & Covariance Explorer", module_id="correlation")

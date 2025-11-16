@@ -3,7 +3,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import streamlit as st
-from utils.ui_components import apply_page_config, apply_theme, create_two_column_layout, render_theory_panel
+from utils.ui_components import apply_page_config, apply_theme, create_two_column_layout, render_theory_panel, render_enhanced_sidebar
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
@@ -11,8 +11,11 @@ import plotly.express as px
 from scipy import stats
 
 # Apply theme
-apply_page_config(title="Probability Explorer", icon="")
+apply_page_config(title="Probability Explorer", icon="", sidebar_state="expanded")
 apply_theme(page_type="page")
+
+# Render sidebar
+render_enhanced_sidebar()
 
 # Create layout
 col1, col2 = create_two_column_layout("Probability Explorer", module_id="probability")

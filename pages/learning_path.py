@@ -3,13 +3,16 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import streamlit as st
-from utils.ui_components import apply_page_config, apply_theme
+from utils.ui_components import apply_page_config, apply_theme, render_enhanced_sidebar
 from utils.learning_path import LEARNING_PATH, get_all_modules, calculate_phase_progress, calculate_total_progress
 import pandas as pd
 
 # Apply theme
 apply_page_config(title="Learning Path", icon="🗺️", sidebar_state="expanded")
 apply_theme(page_type="page")
+
+# Render sidebar
+render_enhanced_sidebar()
 
 # Initialize session state for tracking completed modules
 if 'completed_modules' not in st.session_state:
