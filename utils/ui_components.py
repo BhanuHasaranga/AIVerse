@@ -165,18 +165,18 @@ def render_enhanced_sidebar():
     if 'completed_modules' not in st.session_state:
         st.session_state.completed_modules = set()
     
-    # Apply sidebar-specific CSS (hierarchical navigation style)
+    # Apply sidebar-specific CSS (AIVerse style - exact match)
     st.markdown("""
         <style>
-        /* Clean hierarchical sidebar */
+        /* AIVerse Sidebar - Clean Educational Design */
         [data-testid="stSidebar"] {
-            background-color: #fafbfc;
-            border-right: 1px solid #e1e4e8;
+            background-color: #F7F7F7;
+            border-right: 1px solid #E5E5E5;
             padding-top: 0;
         }
         
         [data-testid="stSidebar"] * {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }
         
         /* Hide radio button labels */
@@ -184,110 +184,147 @@ def render_enhanced_sidebar():
             display: none;
         }
         
-        /* Navigation items - clean flat style */
+        /* Navigation items with bullet style */
+        [data-testid="stSidebar"] [role="radiogroup"] {
+            gap: 0;
+        }
+        
         [data-testid="stSidebar"] [role="radiogroup"] label {
-            padding: 0.5rem 1rem;
+            padding: 0.625rem 1.75rem;
             border-radius: 0;
-            font-size: 0.875rem;
-            color: #24292e;
-            transition: all 0.15s ease;
+            font-size: 0.9375rem;
+            color: #333333;
+            transition: all 0.2s ease;
             cursor: pointer;
             font-weight: 400;
-            border-left: 2px solid transparent;
+            border-left: 0;
             margin: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Bullet icon - inactive (dark gray circle) */
+        [data-testid="stSidebar"] [role="radiogroup"] label::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #333333;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+        
+        /* Bullet icon - active (red filled circle) */
+        [data-testid="stSidebar"] [role="radiogroup"] label[data-checked="true"]::before {
+            background-color: #EF4444;
+            width: 10px;
+            height: 10px;
         }
         
         [data-testid="stSidebar"] [role="radiogroup"] label:hover {
-            background-color: #f6f8fa;
-            color: #0969da;
+            background-color: rgba(0, 0, 0, 0.03);
         }
         
         [data-testid="stSidebar"] [role="radiogroup"] label[data-checked="true"] {
-            background-color: #ddf4ff;
-            color: #0969da;
+            background-color: transparent;
+            color: #333333;
             font-weight: 500;
-            border-left: 2px solid #0969da;
         }
         
-        /* Expander styling for sections */
+        /* Expander (collapsible section) styling */
         [data-testid="stSidebar"] .streamlit-expanderHeader {
-            font-size: 0.75rem;
+            font-size: 0.6875rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #57606a;
-            padding: 0.5rem 1rem;
-            border-radius: 0;
-            background: transparent;
+            letter-spacing: 0.8px;
+            color: #999999;
+            padding: 0.75rem 1.75rem;
+            border-radius: 12px;
+            background: #EBEBEB;
+            margin: 0 1rem;
+            margin-bottom: 0.5rem;
         }
         
         [data-testid="stSidebar"] .streamlit-expanderHeader:hover {
-            background-color: #f6f8fa;
+            background-color: #E0E0E0;
         }
         
-        /* Hide the keyboard_arrow_down text */
+        /* Hide default SVG icon */
         [data-testid="stSidebar"] .streamlit-expanderHeader svg {
             display: none;
         }
         
-        /* Add custom arrow using CSS */
-        [data-testid="stSidebar"] .streamlit-expanderHeader::before {
-            content: "▸";
-            margin-right: 0.5rem;
-            font-size: 0.875rem;
+        /* Custom arrow for expander */
+        [data-testid="stSidebar"] .streamlit-expanderHeader::after {
+            content: "›";
+            position: absolute;
+            right: 1.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #999999;
             transition: transform 0.2s ease;
-            display: inline-block;
         }
         
-        [data-testid="stSidebar"] details[open] > summary.streamlit-expanderHeader::before {
-            content: "▾";
+        [data-testid="stSidebar"] details[open] > summary.streamlit-expanderHeader::after {
+            transform: rotate(90deg);
         }
         
-        /* Divider lines */
+        /* Expander content padding */
+        [data-testid="stSidebar"] .streamlit-expanderContent {
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Divider lines - subtle */
         [data-testid="stSidebar"] hr {
-            margin: 0.5rem 0;
-            border-color: #e1e4e8;
+            margin: 1.5rem 1.75rem;
+            border: none;
+            border-top: 1px solid #E0E0E0;
         }
         
         /* Progress section */
         [data-testid="stSidebar"] .stProgress {
-            margin: 0.5rem 1rem;
+            margin: 0.5rem 1.75rem;
         }
         
         [data-testid="stSidebar"] p {
-            color: #57606a;
+            color: #999999;
             font-size: 0.8125rem;
-            padding-left: 1rem;
+            padding-left: 1.75rem;
         }
         
         /* Caption text */
         [data-testid="stSidebar"] .stCaptionContainer {
-            color: #6e7781 !important;
-            padding-left: 1rem;
+            color: #AAAAAA !important;
+            padding-left: 1.75rem;
             font-size: 0.75rem;
         }
         
-        /* Buttons - minimal style */
+        /* Buttons - minimal */
         [data-testid="stSidebar"] button {
             font-size: 0.8125rem;
-            border-radius: 6px;
-            border: 1px solid #d0d7de;
+            border-radius: 8px;
+            border: 1px solid #E0E0E0;
             background: white;
-            color: #24292e;
+            color: #333333;
             font-weight: 500;
-            transition: all 0.15s ease;
-            padding: 0.375rem 0.75rem;
+            transition: all 0.2s ease;
+            padding: 0.5rem 1rem;
         }
         
         [data-testid="stSidebar"] button:hover {
-            background-color: #f6f8fa;
-            border-color: #1f2328;
+            background-color: #FAFAFA;
+            border-color: #CCCCCC;
         }
         
         /* Header styling */
         [data-testid="stSidebar"] h2 {
-            padding-left: 1rem !important;
+            padding-left: 1.75rem !important;
             margin-bottom: 0.25rem !important;
+            color: #333333 !important;
+            font-weight: 600 !important;
         }
         </style>
     """, unsafe_allow_html=True)
