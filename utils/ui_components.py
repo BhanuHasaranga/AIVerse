@@ -225,6 +225,24 @@ def render_enhanced_sidebar():
             background-color: #f6f8fa;
         }
         
+        /* Hide the keyboard_arrow_down text */
+        [data-testid="stSidebar"] .streamlit-expanderHeader svg {
+            display: none;
+        }
+        
+        /* Add custom arrow using CSS */
+        [data-testid="stSidebar"] .streamlit-expanderHeader::before {
+            content: "▸";
+            margin-right: 0.5rem;
+            font-size: 0.875rem;
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+        
+        [data-testid="stSidebar"] details[open] > summary.streamlit-expanderHeader::before {
+            content: "▾";
+        }
+        
         /* Divider lines */
         [data-testid="stSidebar"] hr {
             margin: 0.5rem 0;
