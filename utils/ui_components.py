@@ -251,9 +251,20 @@ def render_enhanced_sidebar():
             background-color: #E0E0E0;
         }
         
-        /* Hide default SVG icon */
-        [data-testid="stSidebar"] .streamlit-expanderHeader svg {
-            display: none;
+        /* Hide the icon and its text completely */
+        [data-testid="stSidebar"] .streamlit-expanderHeader svg,
+        [data-testid="stSidebar"] .streamlit-expanderHeader p {
+            display: none !important;
+        }
+        
+        /* Hide the icon container */
+        [data-testid="stSidebar"] .streamlit-expanderHeader div[class*="icon"] {
+            display: none !important;
+        }
+        
+        /* Make header text full width */
+        [data-testid="stSidebar"] .streamlit-expanderHeader {
+            position: relative;
         }
         
         /* Custom arrow for expander */
