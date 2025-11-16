@@ -18,7 +18,7 @@ col1, col2 = create_two_column_layout("Mode Explorer", "👑")
 
 # LEFT COLUMN
 with col1:
-    st.subheader("📊 Interactive Mode Explorer")
+    st.subheader("Interactive Mode Explorer")
     
     # Data input with categorical support
     data, data_type = render_data_input(allow_categorical=True, data_size_range=(5, 30, 15))
@@ -62,7 +62,7 @@ with col1:
         render_frequency_bar_chart(freq_df, highlight_values=modes)
         
         # Step-by-step calculation
-        with st.expander("📐 Step-by-Step Calculation", expanded=True):
+        with st.expander("Step-by-Step Calculation", expanded=True):
             st.write("**Step 1: Start with the dataset**")
             if data_type == "Numeric":
                 data_str = "[" + ", ".join(str(int(v) if v == int(v) else round(v, 2)) for v in data) + "]"
@@ -89,7 +89,7 @@ with col1:
 # RIGHT COLUMN
 with col2:
     def definition():
-        st.write("### 📖 Definition")
+        st.write("### Definition")
         st.write("""
         The **mode** is the most frequent value in a dataset.
         
@@ -108,7 +108,7 @@ with col2:
         st.latex(r"\text{Modes} = 1, 2")
     
     def examples():
-        st.write("### 🍎 Real-World Examples")
+        st.write("### Real-World Examples")
         
         st.write("**Example 1: Clothing Store**")
         st.write("Sizes sold: [M, L, L, M, M, S, M, L, L]")
@@ -121,21 +121,21 @@ with col2:
         st.write("→ Most popular!")
     
     def ml_usage():
-        st.write("### 🤖 Mode in AI/ML")
+        st.write("### Mode in AI/ML")
         
-        st.write("**1️⃣ Categorical Feature Analysis**")
+        st.write("**1. Categorical Feature Analysis**")
         st.code("df['Gender'].mode()\n# Output: ['Male']", language="python")
         st.write("→ Detect imbalance")
         
-        st.write("**2️⃣ Data Imputation**")
+        st.write("**2. Data Imputation**")
         st.code("df['City'].fillna(\n    df['City'].mode()[0]\n)", language="python")
         st.write("→ Fill missing with most common")
         
-        st.write("**3️⃣ Bias Detection**")
+        st.write("**3. Bias Detection**")
         st.write("Analyze if predictions favor one class")
     
     def summary():
-        st.write("### ✨ Quick Summary")
+        st.write("### Quick Summary")
         
         data = {
             "Concept": ["Mean", "Median", "Mode"],
@@ -143,12 +143,12 @@ with col2:
         }
         st.dataframe(pd.DataFrame(data), use_container_width=True, hide_index=True)
         
-        st.write("### 💡 When to Use Mode")
+        st.write("### When to Use Mode")
         st.write("""
-        ✅ **Categorical data** (colors, sizes)
-        ✅ **Find what's popular**
-        ✅ **Detect imbalance** in datasets
-        ✅ **Fill missing data** intelligently
+        • **Categorical data** (colors, sizes)
+        • **Find what's popular**
+        • **Detect imbalance** in datasets
+        • **Fill missing data** intelligently
         """)
     
     render_theory_panel({

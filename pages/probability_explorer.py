@@ -11,27 +11,27 @@ import plotly.express as px
 from scipy import stats
 
 # Apply theme
-apply_page_config(title="Probability Explorer", icon="🎲")
+apply_page_config(title="Probability Explorer", icon="")
 apply_theme(page_type="page")
 
 # Create layout
-col1, col2 = create_two_column_layout("Probability Explorer", "🎲")
+col1, col2 = create_two_column_layout("Probability Explorer", "")
 
 # LEFT COLUMN
 with col1:
-    st.subheader("📊 Interactive Probability Explorer")
+    st.subheader("Interactive Probability Explorer")
     
     # Tabs for different probability concepts
     prob_tab1, prob_tab2, prob_tab3, prob_tab4 = st.tabs([
-        "🎲 Basic Probability", 
-        "🔗 Conditional Probability", 
-        "🎯 Bayes' Theorem",
-        "📈 Random Variables"
+        "Basic Probability", 
+        "Conditional Probability", 
+        "Bayes' Theorem",
+        "Random Variables"
     ])
     
     # TAB 1: Basic Probability
     with prob_tab1:
-        st.write("### 🎲 Probability Basics")
+        st.write("### Probability Basics")
         
         # Coin flip simulator
         st.write("**Example 1: Coin Flips**")
@@ -115,7 +115,7 @@ with col1:
     
     # TAB 2: Conditional Probability
     with prob_tab2:
-        st.write("### 🔗 Conditional Probability")
+        st.write("### Conditional Probability")
         st.write("P(A|B) = Probability of A given that B has occurred")
         
         st.write("**Example: Medical Test Accuracy**")
@@ -191,7 +191,7 @@ P(Disease|Test+) = ({sensitivity:.3f} × {p_disease:.3f}) / {p_test_pos:.3f}
     
     # TAB 3: Bayes' Theorem
     with prob_tab3:
-        st.write("### 🎯 Bayes' Theorem")
+        st.write("### Bayes' Theorem")
         st.write("Update beliefs based on new evidence")
         
         st.latex(r"P(A|B) = \frac{P(B|A) \times P(A)}{P(B)}")
@@ -241,7 +241,7 @@ P(Disease|Test+) = ({sensitivity:.3f} × {p_disease:.3f}) / {p_test_pos:.3f}
         st.plotly_chart(fig, use_container_width=True)
         
         # Show calculation
-        with st.expander("📐 Step-by-Step Calculation"):
+        with st.expander("Step-by-Step Calculation"):
             st.write("**Step 1: Calculate P('Free')**")
             st.latex(r"P(\text{Free}) = P(\text{Free}|\text{Spam}) \times P(\text{Spam}) + P(\text{Free}|\text{Not Spam}) \times P(\text{Not Spam})")
             st.code(f"P(Free) = {p_word_given_spam:.3f} × {p_spam:.3f} + {p_word_given_not_spam:.3f} × {p_not_spam:.3f} = {p_word:.3f}")
@@ -252,7 +252,7 @@ P(Disease|Test+) = ({sensitivity:.3f} × {p_disease:.3f}) / {p_test_pos:.3f}
     
     # TAB 4: Random Variables
     with prob_tab4:
-        st.write("### 📈 Random Variables")
+        st.write("### Random Variables")
         
         # Distribution selector
         dist_type = st.selectbox(
@@ -382,7 +382,7 @@ P(Disease|Test+) = ({sensitivity:.3f} × {p_disease:.3f}) / {p_test_pos:.3f}
 # RIGHT COLUMN
 with col2:
     def definition():
-        st.write("### 📖 Probability Fundamentals")
+        st.write("### Probability Fundamentals")
         
         st.write("**Basic Probability:**")
         st.latex(r"P(A) = \frac{\text{Number of favorable outcomes}}{\text{Total number of outcomes}}")
@@ -400,7 +400,7 @@ with col2:
         st.write("Update prior beliefs with evidence")
     
     def examples():
-        st.write("### 🍎 Real-World Examples")
+        st.write("### Real-World Examples")
         
         st.write("**1. Weather Forecasting**")
         st.write("P(Rain|Dark Clouds) uses Bayes' theorem to predict rain given observed clouds")
@@ -416,7 +416,7 @@ with col2:
         st.write("Poisson: P(failures per day)")
     
     def ml_usage():
-        st.write("### 🤖 In AI/ML")
+        st.write("### In AI/ML")
         
         st.write("**1. Naive Bayes Classifier**")
         st.write("Uses Bayes' theorem for classification")
@@ -434,7 +434,7 @@ with col2:
         st.write("Maximum Likelihood Estimation uses probability theory")
     
     def summary():
-        st.write("### ✨ Quick Summary")
+        st.write("### Quick Summary")
         
         data = {
             "Concept": ["Basic Probability", "Conditional", "Bayes", "Random Variable"],
@@ -443,13 +443,13 @@ with col2:
         }
         st.dataframe(pd.DataFrame(data), use_container_width=True, hide_index=True)
         
-        st.write("### 💡 Key Insights")
+        st.write("### Key Insights")
         st.write("""
-        ✅ **Probability** quantifies uncertainty
-        ✅ **Conditional** incorporates evidence
-        ✅ **Bayes** updates beliefs rationally
-        ✅ **Random variables** model outcomes
-        ✅ **Foundation** for all ML algorithms
+        • **Probability** quantifies uncertainty
+        • **Conditional** incorporates evidence
+        • **Bayes** updates beliefs rationally
+        • **Random variables** model outcomes
+        • **Foundation** for all ML algorithms
         """)
     
     render_theory_panel({

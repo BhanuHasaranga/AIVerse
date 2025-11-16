@@ -31,14 +31,14 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.title("� Variance & Standard Deviation Explorer")
+st.title("Variance & Standard Deviation Explorer")
 
 # Create two columns with increased gap: 2.5:1 ratio (main content : theory)
 col1, col2 = st.columns([2.5, 1], gap="large")
 
 # LEFT COLUMN (2.5/3.5 width) - Interactive chart and controls
 with col1:
-    st.subheader("📊 Interactive Variance Explorer")
+    st.subheader("Interactive Variance Explorer")
     
     # Data input method selection
     input_method = st.radio("Choose data input method:", ["Generate Random", "Upload CSV", "Enter Manually"], horizontal=True)
@@ -76,9 +76,9 @@ with col1:
                 df = pd.read_csv(uploaded_file)
                 data = df.iloc[:, 0].tolist()
                 st.session_state['data'] = data
-                st.success("✅ Data loaded successfully!")
+                st.success("• Data loaded successfully!")
             except Exception as e:
-                st.error(f"❌ Error reading file: {e}")
+                st.error(f"• Error reading file: {e}")
             
             data = st.session_state.get('data', [])
         else:
@@ -97,9 +97,9 @@ with col1:
                 # Parse the input
                 data = [float(x.strip()) for x in manual_input.split(',')]
                 st.session_state['data'] = data
-                st.success(f"✅ Loaded {len(data)} values")
+                st.success(f"• Loaded {len(data)} values")
             except ValueError:
-                st.error("❌ Invalid input. Please enter numbers separated by commas.")
+                st.error("• Invalid input. Please enter numbers separated by commas.")
                 data = []
         else:
             data = st.session_state.get('data', [])
@@ -111,7 +111,7 @@ with col1:
         
         # Use expander for large datasets to save space
         if len(data) > 15:
-            with st.expander(f"📋 Dataset ({len(data)} values)", expanded=False):
+            with st.expander(f"Dataset ({len(data)} values)", expanded=False):
                 st.code(data_str, language="python")
         else:
             st.code(data_str, language="python")
@@ -154,7 +154,7 @@ with col1:
         st.plotly_chart(fig, use_container_width=True)
         
         # Visualize the 68-95-99.7 rule
-        st.write("### 📐 Standard Deviation Rule (68-95-99.7)")
+        st.write("### Standard Deviation Rule (68-95-99.7)")
         
         within_1sigma = sum(1 for x in data if mean_val - std_dev <= x <= mean_val + std_dev) / len(data) * 100
         within_2sigma = sum(1 for x in data if mean_val - 2*std_dev <= x <= mean_val + 2*std_dev) / len(data) * 100
@@ -213,7 +213,7 @@ with col2:
     tab1, tab2, tab3, tab4 = st.tabs(["Definition", "Examples", "ML Usage", "Summary"])
     
     with tab1:
-        st.write("### 📖 Definition")
+        st.write("### Definition")
         st.write("""
         Both **variance** and **standard deviation** measure how spread out data is from the mean.
         """)
@@ -226,7 +226,7 @@ with col2:
         st.write("Square root of variance (easier to interpret)")
         st.latex(r"\sigma = \sqrt{\sigma^2}")
         
-        st.write("### 🧠 Simple Explanation")
+        st.write("### Simple Explanation")
         st.write("""
         **Spread = how inconsistent your data is.**
         
@@ -238,7 +238,7 @@ with col2:
         """)
     
     with tab2:
-        st.write("### 🍎 Real-World Examples")
+        st.write("### Real-World Examples")
         
         st.write("**Example 1: Test Scores**")
         st.write("""
@@ -252,50 +252,43 @@ with col2:
         st.write("**Example 2: Stock Returns**")
         st.write("""
         Stock A: avg 10%, variance 2
-        → Steady performer ✅
-        
-        Stock B: avg 10%, variance 50
-        → Risky, unpredictable ❌
-        """)
+        → Steady performer • Stock B: avg 10%, variance 50
+        → Risky, unpredictable • """)
         
         st.write("**Example 3: Manufacturing**")
         st.write("""
-        Low variance → Quality consistent ✅
-        
-        High variance → Defects likely ❌
-        """)
+        Low variance → Quality consistent • High variance → Defects likely • """)
     
     with tab3:
-        st.write("### 🤖 Variance in AI/ML")
+        st.write("### Variance in AI/ML")
         
-        st.write("**1️⃣ Model Variance (Bias-Variance Tradeoff)**")
+        st.write("**1. Model Variance (Bias-Variance Tradeoff)**")
         st.write("""
         - High variance → Overfits (memorizes)
         - Low variance → Underfits (too simple)
         - Goal: Balance! 🎯
         """)
         
-        st.write("**2️⃣ Loss Functions**")
+        st.write("**2. Loss Functions**")
         st.write("""
         MSE squares errors (= variance):
         """)
         st.latex(r"MSE = \frac{1}{n}\sum(y_{pred} - y_{true})^2")
         
-        st.write("**3️⃣ Feature Scaling (Z-score)**")
+        st.write("**3. Feature Scaling (Z-score)**")
         st.write("""
         Standardize with std dev:
         """)
         st.latex(r"Z = \frac{x - \mu}{\sigma}")
         st.write("→ Helps ML models converge faster")
         
-        st.write("**4️⃣ Anomaly Detection**")
+        st.write("**4. Anomaly Detection**")
         st.write("""
         Detect outliers using 3σ rule:
-        Values beyond ±3σ = anomalies ⚠️
-        """)
+        Values beyond ±3σ = anomalies • """)
     
     with tab4:
-        st.write("### ✨ Quick Summary")
+        st.write("### Quick Summary")
         
         summary_data = {
             "Concept": ["Variance (σ²)", "Std Dev (σ)", "Low Variance", "High Variance"],
@@ -316,16 +309,16 @@ with col2:
         summary_df = pd.DataFrame(summary_data)
         st.dataframe(summary_df, use_container_width=True, hide_index=True)
         
-        st.write("### 💡 Why It Matters")
+        st.write("### Why It Matters")
         st.write("""
-        ✅ Understand data stability
-        ✅ Prevent overfitting
-        ✅ Scale features properly
-        ✅ Detect anomalies
-        ✅ Build reliable ML models
+        • Understand data stability
+        • Prevent overfitting
+        • Scale features properly
+        • Detect anomalies
+        • Build reliable ML models
         """)
         
-        st.write("### 🎨 68-95-99.7 Rule")
+        st.write("### 68-95-99.7 Rule")
         st.write("""
         For normal distributions:
         

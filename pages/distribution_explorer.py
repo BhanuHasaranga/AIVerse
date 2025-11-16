@@ -1,43 +1,24 @@
 import sys
 from pathlib import Path
-
-# Add parent directory to Python path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import streamlit as st
-import plotly.express as px
-import plotly.graph_objects as go
+from utils.ui_components import apply_page_config, apply_theme, create_two_column_layout, render_theory_panel
 import pandas as pd
 import numpy as np
 from scipy import stats
+import plotly.express as px
 
-# Set page layout to wide mode with custom margins
-st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
+# Apply theme
+apply_page_config(title="Distribution Explorer", icon="🔔")
+apply_theme(page_type="page")
 
-# Custom CSS to reduce margins and padding
-st.markdown("""
-    <style>
-    .main {
-        max-width: 100%;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    [data-testid="stMetricContainer"] {
-        background-color: rgba(28, 131, 225, 0.1);
-        padding: 10px;
-        border-radius: 5px;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+# Create layout
+col1, col2 = create_two_column_layout("Distribution Explorer")
 
-st.title("📊 Distribution Explorer")
-
-# Create two columns with increased gap: 2.5:1 ratio (main content : theory)
-col1, col2 = st.columns([2.5, 1], gap="large")
-
-# LEFT COLUMN (2.5/3.5 width) - Interactive chart and controls
+# LEFT COLUMN
 with col1:
-    st.subheader("📊 Interactive Distribution Visualizer")
+    st.subheader("Interactive Distribution Visualizer")
     
     # Distribution type selection
     dist_type = st.radio("Choose distribution type:", 
@@ -52,20 +33,15 @@ with col1:
         data = np.random.normal(loc=50, scale=15, size=sample_size)
         dist_name = "Normal Distribution"
         description = "Symmetrical bell curve - most values cluster around mean"
-    
     elif dist_type == "Uniform (Flat)":
         data = np.random.uniform(low=0, high=100, size=sample_size)
         dist_name = "Uniform Distribution"
         description = "Flat shape - equal probability across range"
-    
     elif dist_type == "Right-Skewed":
-        # Generate right-skewed data using exponential
         data = np.random.exponential(scale=20, size=sample_size) + 10
         dist_name = "Right-Skewed Distribution"
         description = "Tail extends to right - few very large values"
-    
     else:  # Left-Skewed
-        # Generate left-skewed data using negative exponential
         data = 100 - np.random.exponential(scale=20, size=sample_size)
         dist_name = "Left-Skewed Distribution"
         description = "Tail extends to left - few very small values"
@@ -99,7 +75,7 @@ with col1:
                       title=f"{dist_name} (n={sample_size})",
                       labels={"Values": "Values", "count": "Frequency"})
     
-    # Add vertical lines for mean, median, mode
+    # Add vertical lines for mean, median
     fig.add_vline(x=mean_val, line_dash="dash", line_color="red",
                  annotation_text=f"Mean: {mean_val:.2f}", annotation_position="top right")
     fig.add_vline(x=median_val, line_dash="dash", line_color="green",
@@ -114,36 +90,36 @@ with col1:
     st.plotly_chart(fig, use_container_width=True)
     
     # Skewness & Kurtosis explanation
-    st.write("### 📐 Distribution Characteristics")
+    st.write("### Distribution Characteristics")
     
     col_skew_exp, col_kurt_exp = st.columns(2)
     
     with col_skew_exp:
         st.write("**Skewness:**")
         if skewness > 0.5:
-            st.write(f"🔴 **Right-Skewed** ({skewness:.3f})")
+            st.write(f"**Right-Skewed** ({skewness:.3f})")
             st.write("Long tail to the right - few very large values")
         elif skewness < -0.5:
-            st.write(f"🔴 **Left-Skewed** ({skewness:.3f})")
+            st.write(f"**Left-Skewed** ({skewness:.3f})")
             st.write("Long tail to the left - few very small values")
         else:
-            st.write(f"🟢 **Approximately Symmetric** ({skewness:.3f})")
+            st.write(f"**Approximately Symmetric** ({skewness:.3f})")
             st.write("Balanced distribution - mean ≈ median")
     
     with col_kurt_exp:
         st.write("**Kurtosis:**")
         if kurtosis_val > 0:
-            st.write(f"🔴 **Leptokurtic** ({kurtosis_val:.3f})")
+            st.write(f"**Leptokurtic** ({kurtosis_val:.3f})")
             st.write("Sharp peak, heavy tails - outliers more likely")
         elif kurtosis_val < 0:
-            st.write(f"🔵 **Platykurtic** ({kurtosis_val:.3f})")
+            st.write(f"**Platykurtic** ({kurtosis_val:.3f})")
             st.write("Flat peak, light tails - fewer outliers")
         else:
-            st.write(f"🟢 **Mesokurtic** ({kurtosis_val:.3f})")
+            st.write(f"**Mesokurtic** ({kurtosis_val:.3f})")
             st.write("Normal level of peak and tails")
     
     # Step-by-step interpretation
-    with st.expander("📐 Distribution Analysis", expanded=True):
+    with st.expander("Distribution Analysis", expanded=True):
         st.write("**Step 1: Identify Distribution Type**")
         st.write(f"Current: {dist_name}")
         
@@ -151,11 +127,11 @@ with col1:
         st.write(f"Mean: {mean_val:.2f}")
         st.write(f"Median: {median_val:.2f}")
         if abs(mean_val - median_val) < 1:
-            st.write("✅ Mean ≈ Median → Symmetric distribution")
+            st.write("• Mean ≈ Median → Symmetric distribution")
         elif mean_val > median_val:
-            st.write("⚠️ Mean > Median → Right-skewed distribution")
+            st.write("• Mean > Median → Right-skewed distribution")
         else:
-            st.write("⚠️ Mean < Median → Left-skewed distribution")
+            st.write("• Mean < Median → Left-skewed distribution")
         
         st.write("**Step 3: Calculate Spread**")
         st.latex(fr"\sigma = {std_dev:.2f}")
@@ -173,31 +149,26 @@ with col1:
         
         st.write("**Step 4: AI/ML Implications**")
         if dist_type == "Normal (Bell Curve)":
-            st.write("✅ Good for linear regression, neural networks")
-            st.write("✅ Assume normality in hypothesis testing")
-            st.write("✅ Use standard normalization")
+            st.write("• Good for linear regression, neural networks")
+            st.write("• Assume normality in hypothesis testing")
+            st.write("• Use standard normalization")
         elif dist_type == "Uniform (Flat)":
-            st.write("✅ Good for random initialization of weights")
-            st.write("✅ No extreme outliers to worry about")
-            st.write("⚠️ Some algorithms assume normality - may need transformation")
+            st.write("• Good for random initialization of weights")
+            st.write("• No extreme outliers to worry about")
+            st.write("• Some algorithms assume normality - may need transformation")
         else:  # Skewed
-            st.write("⚠️ Consider log/sqrt transformation before modeling")
-            st.write("⚠️ Outliers may heavily influence model")
-            st.write("✅ Use robust methods (median, quantiles)")
+            st.write("• Consider log/sqrt transformation before modeling")
+            st.write("• Outliers may heavily influence model")
+            st.write("• Use robust methods (median, quantiles)")
 
-# RIGHT COLUMN (1/3.5 width) - Theory notes
+# RIGHT COLUMN
 with col2:
-    st.subheader("📚 Learning Guide")
-    
-    # Tab-based navigation
-    tab1, tab2, tab3, tab4 = st.tabs(["Types", "Examples", "ML Impact", "Summary"])
-    
-    with tab1:
-        st.write("### 📖 Distribution Types")
+    def definition():
+        st.write("### Distribution Types")
         
         st.write("**1. Normal Distribution**")
         st.write("""
-        🔔 Bell-shaped, symmetrical
+        Bell-shaped, symmetrical
         
         Mean = Median = Mode
         
@@ -206,7 +177,7 @@ with col2:
         
         st.write("**2. Uniform Distribution**")
         st.write("""
-        ▭ Flat, equal probability
+        Flat, equal probability
         
         All values equally likely
         
@@ -215,7 +186,7 @@ with col2:
         
         st.write("**3. Right-Skewed**")
         st.write("""
-        📈 Tail extends right
+        Tail extends right
         
         Mean > Median > Mode
         
@@ -224,15 +195,15 @@ with col2:
         
         st.write("**4. Left-Skewed**")
         st.write("""
-        📉 Tail extends left
+        Tail extends left
         
         Mean < Median < Mode
         
         Few extreme small values
         """)
     
-    with tab2:
-        st.write("### 🍎 Real-World Examples")
+    def examples():
+        st.write("### Real-World Examples")
         
         st.write("**Normal Distribution:**")
         st.write("""
@@ -263,46 +234,46 @@ with col2:
         - Lifetime in reliability
         """)
     
-    with tab3:
-        st.write("### 🤖 Impact on ML")
+    def ml_usage():
+        st.write("### Impact on ML")
         
         st.write("**Normal Data:**")
         st.write("""
-        ✅ Most algorithms work well
-        ✅ Use directly
-        ✅ Standard scaling safe
+        • Most algorithms work well
+        • Use directly
+        • Standard scaling safe
         """)
         
         st.write("**Uniform Data:**")
         st.write("""
-        ✅ Good for initialization
-        ⚠️ May need normalization
-        ✅ No outlier issues
+        • Good for initialization
+        • May need normalization
+        • No outlier issues
         """)
         
         st.write("**Skewed Data:**")
         st.write("""
-        ⚠️ Transform first!
+        • Transform first!
         - Log transform
         - Box-Cox transform
         - Binning/bucketing
-        ⚠️ Outliers problematic
+        • Outliers problematic
         """)
     
-    with tab4:
-        st.write("### ✨ Quick Summary")
+    def summary():
+        st.write("### Quick Summary")
         
         summary_data = {
             "Type": ["Normal", "Uniform", "Right-Skew", "Left-Skew"],
-            "Shape": ["Bell 🔔", "Flat ▭", "Tail→ 📈", "←Tail 📉"],
-            "Mean=Median": ["Yes ✅", "Yes ✅", "No ❌", "No ❌"],
+            "Shape": ["Bell", "Flat", "Tail →", "← Tail"],
+            "Mean=Median": ["Yes", "Yes", "No", "No"],
             "AI Action": ["Use directly", "Transform", "Log transform", "Log transform"]
         }
         
         summary_df = pd.DataFrame(summary_data)
         st.dataframe(summary_df, use_container_width=True, hide_index=True)
         
-        st.write("### 💡 Key Takeaway")
+        st.write("### Key Takeaway")
         st.write("""
         **Before building any ML model:**
         
@@ -310,5 +281,12 @@ with col2:
         2. Check distribution type
         3. Transform if needed
         4. Apply appropriate scaling
-        5. Train with confidence! 🚀
+        5. Train with confidence!
         """)
+    
+    render_theory_panel({
+        "Definition": definition,
+        "Examples": examples,
+        "ML Usage": ml_usage,
+        "Summary": summary
+    })

@@ -59,7 +59,7 @@ Instead of passive reading, you:
 | **📈 Median Explorer** | Learn central values and outlier resistance | ✅ Live |
 | **👑 Mode Explorer** | Find most frequent values (numeric & categorical) | ✅ Live |
 | **📉 Variance Visualizer** | Explore data spread and standard deviation | ✅ Live |
-| **🔔 Distribution Visualizer** | Probability distributions and skewness | ✅ Live |
+| **🔔 Distribution Explorer** | Probability distributions with skewness and kurtosis analysis | ✅ Live |
 | **🔗 Correlation Explorer** | Analyze relationships with scatter plots | ✅ Live |
 | **🎲 Probability Explorer** | Master probability, Bayes' theorem, and random variables | ✅ Live |
 
@@ -135,7 +135,7 @@ pages/
 ├── 📈 median_explorer.py          # Median with outlier analysis
 ├── 👑 mode_explorer.py            # Frequency analysis
 ├── 📉 variance_visualizer.py      # Variance & std deviation
-├── 🔔 distribution_visualizer.py  # Probability distributions
+├── 🔔 distribution_explorer.py    # Probability distributions
 └── 🔗 correlation_explorer.py     # Correlation & covariance
 ```
 

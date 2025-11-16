@@ -21,15 +21,15 @@ st.sidebar.title("🧭 Navigation")
 page = st.sidebar.radio(
     "Choose a learning module:",
     [
-        "🏠 Home",
-        "📊 Mean Explorer",
-        "📈 Median Explorer",
-        "👑 Mode Explorer",
-        "📉 Variance Visualizer",
-        "🔔 Distribution Visualizer",
-        "🔗 Correlation Explorer",
-        "🎲 Probability Explorer",
-        "ℹ️ About"
+        "Home",
+        "Mean Explorer",
+        "Median Explorer",
+        "Mode Explorer",
+        "Variance Visualizer",
+        "Distribution Visualizer",
+        "Correlation Explorer",
+        "Probability Explorer",
+        "ℹAbout"
     ]
 )
 
@@ -95,11 +95,11 @@ if page == "🏠 Home":
     
     with col5:
         render_module_card(
-            title="Distribution Visualizer",
-            description="Explore different probability distributions and how they appear in real-world data.",
-            topics="Normal Distribution, Skewness, Probability",
-            button_text="🔔 Start Distribution Visualizer",
-            page_path="pages/distribution_visualizer.py",
+            title="Distribution Explorer",
+            description="Explore probability distributions with advanced statistics including skewness, kurtosis, and the 68-95-99.7 rule.",
+            topics="Normal, Uniform, Skewed Distributions, Kurtosis",
+            button_text="🔔 Start Distribution Explorer",
+            page_path="pages/distribution_explorer.py",
             icon="🔔"
         )
     
@@ -154,9 +154,9 @@ elif page == "👑 Mode Explorer":
 elif page == "📉 Variance Visualizer":
     st.switch_page("pages/variance_visualizer.py")
 
-# PAGE: DISTRIBUTION VISUALIZER
+# PAGE: DISTRIBUTION EXPLORER
 elif page == "🔔 Distribution Visualizer":
-    st.switch_page("pages/distribution_visualizer.py")
+    st.switch_page("pages/distribution_explorer.py")
 
 # PAGE: CORRELATION EXPLORER
 elif page == "🔗 Correlation Explorer":

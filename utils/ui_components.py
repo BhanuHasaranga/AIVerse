@@ -34,15 +34,19 @@ def apply_theme(page_type="page"):
         st.markdown(Theme.get_page_css(), unsafe_allow_html=True)
 
 
-def create_two_column_layout(title, icon="📊"):
+def create_two_column_layout(title, icon=None):
     """
     Create standard 2.5:1 column layout for explorer pages.
     Similar to: <TwoColumnLayout title="Mean Explorer" />
     
+    Args:
+        title: Page title
+        icon: Optional icon (for backward compatibility, not displayed)
+    
     Returns:
         tuple: (left_column, right_column)
     """
-    st.title(f"{icon} {title}")
+    st.title(title)
     col1, col2 = st.columns([2.5, 1], gap="large")
     return col1, col2
 

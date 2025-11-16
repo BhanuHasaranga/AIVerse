@@ -9,15 +9,15 @@ from utils.chart_components import render_histogram_with_line
 import pandas as pd
 
 # Apply theme
-apply_page_config(title="Median Explorer", icon="📈")
+apply_page_config(title="Median Explorer", icon="")
 apply_theme(page_type="page")
 
 # Create layout
-col1, col2 = create_two_column_layout("Median Explorer", "📈")
+col1, col2 = create_two_column_layout("Median Explorer", "")
 
 # LEFT COLUMN
 with col1:
-    st.subheader("📊 Interactive Median Explorer")
+    st.subheader("Interactive Median Explorer")
     
     # Data input
     data = render_data_input()
@@ -46,7 +46,7 @@ with col1:
         render_histogram_with_line(data, median, "Median", "Histogram of Values", "green")
         
         # Step-by-step calculation
-        with st.expander("📐 Step-by-Step Calculation", expanded=True):
+        with st.expander("Step-by-Step Calculation", expanded=True):
             st.write("**Step 1: Start with the sorted dataset**")
             data_str = "[" + ", ".join(str(int(v) if v == int(v) else round(v, 2)) for v in data) + "]"
             st.code(f"data = {data_str}", language="python")
@@ -70,7 +70,7 @@ with col1:
 # RIGHT COLUMN
 with col2:
     def definition():
-        st.write("### 📖 Definition")
+        st.write("### Definition")
         st.write("""
         The **median** is the middle value of a dataset when all numbers are arranged in order.
         
@@ -88,7 +88,7 @@ with col2:
         st.latex(r"\text{Median} = \frac{5 + 7}{2} = 6")
     
     def examples():
-        st.write("### 🍎 Real-World Examples")
+        st.write("### Real-World Examples")
         
         st.write("**Example 1: House Prices**")
         st.write("Prices: [30M, 35M, 40M, 150M, 200M]")
@@ -100,30 +100,30 @@ with col2:
         col_a, col_b = st.columns(2)
         with col_a:
             st.latex(r"\text{Mean} = 238k")
-            st.write("❌ Misleading!")
+            st.write("• Misleading!")
         with col_b:
             st.latex(r"\text{Median} = 50k")
-            st.write("✅ Realistic!")
+            st.write("• Realistic!")
     
     def ml_usage():
-        st.write("### 🤖 Median in AI/ML")
+        st.write("### Median in AI/ML")
         
-        st.write("**1️⃣ Data Cleaning & Imputation**")
+        st.write("**1. Data Cleaning & Imputation**")
         st.write("""
         - Replace missing values with median
         - More robust for noisy data
         - Reduce skewness in distributions
         """)
         
-        st.write("**2️⃣ Robust Error Metrics**")
+        st.write("**2. Robust Error Metrics**")
         st.latex(r"\text{MedAE} = \text{median}(|y_{pred} - y_{true}|)")
         st.write("→ More robust than MAE for outliers")
         
-        st.write("**3️⃣ Feature Engineering**")
+        st.write("**3. Feature Engineering**")
         st.write("Features grouped and summarized using median for stability")
     
     def summary():
-        st.write("### ✨ Quick Summary")
+        st.write("### Quick Summary")
         
         data = {
             "Concept": ["Definition", "Purpose", "Advantage"],
@@ -135,11 +135,11 @@ with col2:
         }
         st.dataframe(pd.DataFrame(data), use_container_width=True, hide_index=True)
         
-        st.write("### ⚖️ Mean vs Median")
+        st.write("### Mean vs Median")
         comp = {
             "Aspect": ["Affected by outliers?", "Best for"],
-            "Mean": ["✅ Yes", "Normal distributions"],
-            "Median": ["❌ No", "Skewed distributions"]
+            "Mean": ["• Yes", "Normal distributions"],
+            "Median": ["• No", "Skewed distributions"]
         }
         st.dataframe(pd.DataFrame(comp), use_container_width=True, hide_index=True)
     
