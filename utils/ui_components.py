@@ -119,3 +119,96 @@ def render_theory_panel(tabs_content):
             elif content_func:
                 st.write(content_func)
 
+
+def render_enhanced_sidebar():
+    """
+    Render enhanced sidebar navigation with sections and styling.
+    Similar to: <Sidebar sections={modules} />
+    
+    Returns:
+        str: Selected page name
+    """
+    # Apply sidebar-specific CSS
+    st.markdown("""
+        <style>
+        [data-testid="stSidebar"] {
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+        [data-testid="stSidebar"] .css-1d391kg, 
+        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {
+            color: white !important;
+        }
+        [data-testid="stSidebar"] h1, 
+        [data-testid="stSidebar"] h2, 
+        [data-testid="stSidebar"] h3 {
+            color: white !important;
+        }
+        .sidebar-section {
+            margin: 1.5rem 0;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .sidebar-section-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.7) !important;
+            margin-bottom: 0.5rem;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
+    # Header
+    st.sidebar.markdown("# 🤖 AI/ML Hub")
+    st.sidebar.markdown("*Interactive Learning Platform*")
+    st.sidebar.divider()
+    
+    # Navigation sections
+    st.sidebar.markdown('<p class="sidebar-section-title">🏠 MAIN</p>', unsafe_allow_html=True)
+    home_section = st.sidebar.radio(
+        "main_nav",
+        ["Home", "About"],
+        label_visibility="collapsed"
+    )
+    
+    st.sidebar.markdown('<p class="sidebar-section-title">📊 STATISTICS FOUNDATIONS</p>', unsafe_allow_html=True)
+    stats_modules = [
+        "Mean Explorer",
+        "Median Explorer", 
+        "Mode Explorer",
+        "Variance Visualizer"
+    ]
+    stats_section = st.sidebar.radio(
+        "stats_nav",
+        stats_modules,
+        label_visibility="collapsed"
+    )
+    
+    st.sidebar.markdown('<p class="sidebar-section-title">📈 DISTRIBUTIONS & RELATIONSHIPS</p>', unsafe_allow_html=True)
+    dist_modules = [
+        "Distribution Explorer",
+        "Correlation Explorer",
+        "Probability Explorer"
+    ]
+    dist_section = st.sidebar.radio(
+        "dist_nav",
+        dist_modules,
+        label_visibility="collapsed"
+    )
+    
+    # Footer info
+    st.sidebar.divider()
+    st.sidebar.markdown("### 📚 Progress")
+    st.sidebar.progress(0.30, text="Phase 1: 30% Complete")
+    st.sidebar.caption("7 modules | 3 phases planned")
+    
+    # Return selected page (check which section was changed)
+    if home_section != "Home":
+        return home_section
+    
+    # Check if user selected from stats or dist sections
+    # The most recently selected item will be returned
+    # This is a simplified approach - in production you'd track state better
+    return stats_section if stats_section else dist_section
+

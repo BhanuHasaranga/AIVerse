@@ -5,7 +5,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
 import streamlit as st
-from utils.ui_components import apply_page_config, apply_theme, render_hero_section, render_module_card
+from utils.ui_components import (
+    apply_page_config, 
+    apply_theme, 
+    render_hero_section, 
+    render_module_card,
+    render_enhanced_sidebar
+)
 
 # Apply theme
 apply_page_config(
@@ -16,25 +22,11 @@ apply_page_config(
 )
 apply_theme(page_type="home")
 
-# Sidebar Navigation
-st.sidebar.title("🧭 Navigation")
-page = st.sidebar.radio(
-    "Choose a learning module:",
-    [
-        "Home",
-        "Mean Explorer",
-        "Median Explorer",
-        "Mode Explorer",
-        "Variance Visualizer",
-        "Distribution Visualizer",
-        "Correlation Explorer",
-        "Probability Explorer",
-        "ℹAbout"
-    ]
-)
+# Render enhanced sidebar navigation
+page = render_enhanced_sidebar()
 
 # PAGE: HOME
-if page == "🏠 Home":
+if page == "Home":
     render_hero_section(
         "🤖 AI/ML Learning Hub",
         "Master fundamental ML & Statistics concepts through interactive visualizations"
@@ -139,35 +131,35 @@ if page == "🏠 Home":
     """)
 
 # PAGE: MEAN EXPLORER
-elif page == "📊 Mean Explorer":
+elif page == "Mean Explorer":
     st.switch_page("pages/mean_explorer.py")
 
 # PAGE: MEDIAN EXPLORER
-elif page == "📈 Median Explorer":
+elif page == "Median Explorer":
     st.switch_page("pages/median_explorer.py")
 
 # PAGE: MODE EXPLORER
-elif page == "👑 Mode Explorer":
+elif page == "Mode Explorer":
     st.switch_page("pages/mode_explorer.py")
 
 # PAGE: VARIANCE VISUALIZER
-elif page == "📉 Variance Visualizer":
+elif page == "Variance Visualizer":
     st.switch_page("pages/variance_visualizer.py")
 
 # PAGE: DISTRIBUTION EXPLORER
-elif page == "🔔 Distribution Visualizer":
+elif page == "Distribution Explorer":
     st.switch_page("pages/distribution_explorer.py")
 
 # PAGE: CORRELATION EXPLORER
-elif page == "🔗 Correlation Explorer":
+elif page == "Correlation Explorer":
     st.switch_page("pages/correlation_explorer.py")
 
 # PAGE: PROBABILITY EXPLORER
-elif page == "🎲 Probability Explorer":
+elif page == "Probability Explorer":
     st.switch_page("pages/probability_explorer.py")
 
 # PAGE: ABOUT
-elif page == "ℹ️ About":
+elif page == "About":
     st.title("About This Platform")
     
     st.write("""
