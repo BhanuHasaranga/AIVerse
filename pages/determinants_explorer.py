@@ -240,100 +240,165 @@ with col1:
 # RIGHT COLUMN
 with col2:
     def definition():
-        st.write("### What is a Determinant?")
+        st.write("### Definition")
         st.write("""
-        The **determinant** is a scalar value:
-        - Computed from square matrix
-        - Measures "scaling factor"
-        - Tells if matrix is invertible
+        The **determinant** is a scalar value computed from a square matrix that:
+        - Measures the "scaling factor" of linear transformations
+        - Determines if a matrix is invertible
+        - Represents area (2D) or volume (3D) in geometric terms
         """)
         
-        st.write("### 2×2 Determinant")
+        st.write("### 2×2 Determinant Formula")
         st.latex(r"\det(A) = a_{11}a_{22} - a_{12}a_{21}")
+        st.write("**Example:**")
+        st.latex(r"\det\begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix} = 1 \times 4 - 3 \times 2 = -2")
         
-        st.write("### 3×3 Determinant")
+        st.write("### 3×3 Determinant (Sarrus Rule)")
         st.latex(r"\det(A) = a_{11}(a_{22}a_{33} - a_{23}a_{32}) - a_{12}(a_{21}a_{33} - a_{23}a_{31}) + a_{13}(a_{21}a_{32} - a_{22}a_{31})")
+        
+        st.write("### Geometric Interpretation")
+        st.write("""
+        - **2D:** |det(A)| = area of parallelogram formed by column vectors
+        - **3D:** |det(A)| = volume of parallelepiped formed by column vectors
+        - **Sign:** Negative = orientation flip, Positive = same orientation
+        """)
         
         st.write("### Matrix Inverse")
         st.latex(r"A^{-1} = \frac{1}{\det(A)} \text{adj}(A)")
-        st.write("**Exists only if det(A) ≠ 0**")
+        st.write("**Critical:** Inverse exists **only if det(A) ≠ 0**")
+        st.write("If det(A) = 0, matrix is **singular** (not invertible)")
         
         st.write("### Linear Systems")
         st.latex(r"Ax = b \Rightarrow x = A^{-1}b")
-        st.write("**Unique solution if det(A) ≠ 0**")
+        st.write("**Cramer's Rule:** Unique solution exists if det(A) ≠ 0")
     
     def examples():
         st.write("### Real-World Examples")
         
-        st.write("**Area/Volume:**")
-        st.write("""
-        - 2D: Area of parallelogram
-        - 3D: Volume of parallelepiped
-        - Scaling factor of transformation
-        """)
+        st.write("**Example 1: Area Calculation**")
+        st.write("Parallelogram with sides (3, 1) and (1, 3):")
+        st.latex(r"A = \begin{bmatrix} 3 & 1 \\ 1 & 3 \end{bmatrix}")
+        st.latex(r"\det(A) = 3 \times 3 - 1 \times 1 = 8")
+        st.write("→ Area of parallelogram = **8 square units**")
         
-        st.write("**System Solving:**")
-        st.write("""
-        - Circuit analysis
-        - Structural engineering
-        - Economic models
-        """)
+        st.write("**Example 2: System of Equations**")
+        st.write("Solve: 2x + y = 5, x + 3y = 7")
+        st.latex(r"A = \begin{bmatrix} 2 & 1 \\ 1 & 3 \end{bmatrix}, \quad \det(A) = 5")
+        st.write("Since det(A) = 5 ≠ 0, system has unique solution")
+        st.latex(r"x = \frac{\det\begin{bmatrix} 5 & 1 \\ 7 & 3 \end{bmatrix}}{5} = \frac{8}{5}")
         
-        st.write("**Invertibility:**")
-        st.write("""
-        - det = 0 → singular (no inverse)
-        - det ≠ 0 → invertible
-        - Used in matrix operations
-        """)
+        st.write("**Example 3: Transformation Scaling**")
+        st.write("Matrix A scales area by factor of |det(A)|")
+        st.write("If det(A) = 4, transformation doubles area (2×2 = 4)")
+        
+        st.write("**Example 4: Singular Matrix**")
+        st.write("Matrix with dependent rows/columns:")
+        st.latex(r"A = \begin{bmatrix} 2 & 4 \\ 1 & 2 \end{bmatrix}, \quad \det(A) = 0")
+        st.write("→ No inverse, system may have no solution or infinite solutions")
     
     def ml_usage():
-        st.write("### ML Applications")
+        st.write("### In AI/ML")
         
-        st.write("**1. Feature Independence**")
+        st.write("**1. Feature Independence & Multicollinearity**")
         st.write("""
-        - det = 0 → features are linearly dependent
-        - Multicollinearity detection
-        - Feature selection
+        - **det = 0** → Features are linearly dependent
+        - **Problem:** Redundant features, unstable models
+        - **Solution:** Remove dependent features or use regularization
+        - **Detection:** Check if det(XᵀX) ≈ 0 in normal equations
+        """)
+        st.code("""
+# Check feature independence
+cov_matrix = np.cov(X.T)
+if abs(np.linalg.det(cov_matrix)) < 1e-10:
+    print("Warning: Linearly dependent features!")
         """)
         
-        st.write("**2. Change of Variables**")
+        st.write("**2. Change of Variables (Jacobian)**")
         st.write("""
-        - Jacobian determinant
-        - Coordinate transformations
-        - Probability distributions
+        - **Jacobian determinant** for coordinate transformations
+        - Used in: Normalizing flows, GANs, variational inference
+        - Preserves probability mass during transformations
+        """)
+        st.latex(r"p_y(y) = p_x(x) \left|\det\left(\frac{\partial y}{\partial x}\right)\right|")
+        
+        st.write("**3. Optimization & Convexity**")
+        st.write("""
+        - **Hessian determinant** (2nd derivatives)
+        - **det(H) > 0** → Local minimum/maximum
+        - **det(H) = 0** → Saddle point
+        - Used in: Newton's method, convexity checking
+        """)
+        st.code("""
+# Check if critical point is minimum
+H = compute_hessian(loss_function, x)
+if det(H) > 0 and H[0,0] > 0:
+    print("Local minimum found!")
         """)
         
-        st.write("**3. Optimization**")
+        st.write("**4. Linear Systems & Normal Equations**")
         st.write("""
-        - Hessian determinant
-        - Critical point classification
-        - Convexity checking
+        - Solving **Ax = b** in least squares
+        - **Normal equations:** (XᵀX)β = Xᵀy
+        - **Unique solution** if det(XᵀX) ≠ 0
+        - Used in: Linear regression, ridge regression
         """)
+        st.latex(r"\beta = (X^T X)^{-1} X^T y")
+        st.write("**Note:** If det(XᵀX) = 0, use regularization (ridge)")
         
-        st.write("**4. Linear Systems**")
+        st.write("**5. Matrix Decompositions**")
         st.write("""
-        - Solving Ax = b
-        - Normal equations
-        - Least squares solutions
+        - **LU decomposition:** det(A) = det(L) × det(U)
+        - **QR decomposition:** Used in least squares
+        - **Cholesky:** For positive definite matrices
         """)
     
     def summary():
-        st.write("### Key Takeaways")
+        st.write("### Quick Summary")
         
         summary_data = {
-            "Size": ["2×2", "3×3", "n×n"],
-            "Meaning": ["Area", "Volume", "Scaling"],
-            "Zero det": ["No inverse", "Dependent rows", "No unique solution"]
+            "Property": ["Definition", "2×2 Formula", "Geometric", "Invertibility", "Systems"],
+            "Description": [
+                "Scaling factor scalar",
+                "ad - bc",
+                "Area/Volume",
+                "det ≠ 0 → invertible",
+                "det ≠ 0 → unique solution"
+            ],
+            "ML Use": [
+                "Feature independence",
+                "Calculations",
+                "Transformations",
+                "Matrix operations",
+                "Linear regression"
+            ]
         }
         
         summary_df = pd.DataFrame(summary_data)
         st.dataframe(summary_df, use_container_width=True, hide_index=True)
         
+        st.write("### Determinant Rules")
+        st.write("""
+        - **det(AB) = det(A) × det(B)**
+        - **det(Aᵀ) = det(A)**
+        - **det(kA) = kⁿ det(A)** (n = matrix size)
+        - **det(A⁻¹) = 1/det(A)**
+        - **det(I) = 1** (identity matrix)
+        """)
+        
+        st.write("### When det = 0?")
+        st.write("""
+        - Rows/columns are linearly dependent
+        - Matrix is singular (no inverse)
+        - System Ax = b has no unique solution
+        - Transformation collapses space (area/volume = 0)
+        """)
+        
         st.write("### Next Steps")
         st.write("""
-        1. Understand geometric meaning
-        2. Master inverse calculation
-        3. Learn **Eigenvalues** next!
+        1. Master 2×2 and 3×3 calculations
+        2. Understand geometric meaning
+        3. Learn matrix inverse computation
+        4. Move to **Eigenvalues & Eigenvectors** next!
         """)
     
     render_theory_panel({
