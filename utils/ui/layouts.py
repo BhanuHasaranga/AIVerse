@@ -29,38 +29,39 @@ def create_two_column_layout(title, icon=None, module_id=None):
     with col_title:
         st.title(title)
     
-    with col_complete:
-        if module_id:
-            module = get_module_by_id(module_id)
-            if module:
-                is_completed = module_id in st.session_state.completed_modules
-                
-                if is_completed:
-                    st.success("✅ Completed")
-                    if st.button("Mark Incomplete", key=f"uncomplete_{module_id}", use_container_width=True):
-                        st.session_state.completed_modules.discard(module_id)
-                        st.rerun()
-                else:
-                    # Badge and button on same row
-                    difficulty_badge = module.get_difficulty_badge()
-                    difficulty_text = module.difficulty
-                    
-                    col_badge, col_btn, col_spacer = st.columns([1, 3, 1])
-                    with col_badge:
-                        st.markdown(f"""
-                            <div style='
-                                padding-top: 0.5rem;
-                                font-size: 1.5rem;
-                                text-align: center;
-                            '>
-                                {difficulty_badge}
-                            </div>
-                        """, unsafe_allow_html=True)
-                    with col_btn:
-                        if st.button("Mark Complete", key=f"complete_{module_id}"):
-                            st.session_state.completed_modules.add(module_id)
-                            st.success("🎉 Great job!")
-                            st.rerun()
+    # Commented out: Difficulty indicator and completion tracking
+    # with col_complete:
+    #     if module_id:
+    #         module = get_module_by_id(module_id)
+    #         if module:
+    #             is_completed = module_id in st.session_state.completed_modules
+    #             
+    #             if is_completed:
+    #                 st.success("✅ Completed")
+    #                 if st.button("Mark Incomplete", key=f"uncomplete_{module_id}", use_container_width=True):
+    #                     st.session_state.completed_modules.discard(module_id)
+    #                     st.rerun()
+    #             else:
+    #                 # Badge and button on same row
+    #                 difficulty_badge = module.get_difficulty_badge()
+    #                 difficulty_text = module.difficulty
+    #                 
+    #                 col_badge, col_btn, col_spacer = st.columns([1, 3, 1])
+    #                 with col_badge:
+    #                     st.markdown(f"""
+    #                         <div style='
+    #                             padding-top: 0.5rem;
+    #                             font-size: 1.5rem;
+    #                             text-align: center;
+    #                         '>
+    #                             {difficulty_badge}
+    #                         </div>
+    #                     """, unsafe_allow_html=True)
+    #                 with col_btn:
+    #                     if st.button("Mark Complete", key=f"complete_{module_id}"):
+    #                         st.session_state.completed_modules.add(module_id)
+    #                         st.success("🎉 Great job!")
+    #                         st.rerun()
     
     col1, col2 = st.columns([2.5, 1], gap="large")
     
