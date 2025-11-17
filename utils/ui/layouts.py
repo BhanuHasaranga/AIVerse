@@ -37,16 +37,20 @@ def create_two_column_layout(title, icon=None, module_id=None):
                 
                 if is_completed:
                     st.success("✅ Completed")
-                    if st.button("Mark Incomplete", key=f"uncomplete_{module_id}"):
+                    if st.button("Mark Incomplete", key=f"uncomplete_{module_id}", use_container_width=True):
                         st.session_state.completed_modules.discard(module_id)
                         st.rerun()
                 else:
+                    # Keep badge and button on same row
                     difficulty_badge = module.get_difficulty_badge()
-                    st.info(f"{difficulty_badge} {module.difficulty}")
-                    if st.button("Mark Complete", key=f"complete_{module_id}"):
-                        st.session_state.completed_modules.add(module_id)
-                        st.success("🎉 Great job!")
-                        st.rerun()
+                    col_badge, col_btn = st.columns([1, 2])
+                    with col_badge:
+                        st.markdown(f"<div style='padding-top: 0.5rem; font-size: 1.2rem;'>{difficulty_badge}</div>", unsafe_allow_html=True)
+                    with col_btn:
+                        if st.button("Mark Complete", key=f"complete_{module_id}", use_container_width=True):
+                            st.session_state.completed_modules.add(module_id)
+                            st.success("🎉 Great job!")
+                            st.rerun()
     
     col1, col2 = st.columns([2.5, 1], gap="large")
     return col1, col2
