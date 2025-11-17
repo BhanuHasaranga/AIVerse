@@ -340,14 +340,17 @@ def render_enhanced_sidebar():
         </style>
     """, unsafe_allow_html=True)
     
-    # Header - clean and minimal
-    st.sidebar.markdown('<h2 style="color: #24292e; font-size: 1.125rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.25rem;">AIVerse</h2>', unsafe_allow_html=True)
+    # Header - minimal
+    st.sidebar.markdown('<h2 style="color: #333; font-size: 1rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.25rem;">AIVerse</h2>', unsafe_allow_html=True)
     st.sidebar.caption("Interactive Learning")
     
     st.sidebar.divider()
     
-    # Top-level navigation
-    main_nav_options = ["Home", "Welcome", "Learning Path", "About"]
+    # Build navigation - all modules in sections
+    phase1_modules = LEARNING_PATH["phase_1"]["modules"]
+    
+    # Main pages
+    main_nav_options = ["Home", "Learning Path"]
     main_nav_selected = st.sidebar.radio(
         "main_navigation",
         main_nav_options,
@@ -357,18 +360,12 @@ def render_enhanced_sidebar():
     
     st.sidebar.divider()
     
-    # Build navigation with expanders for hierarchy
-    phase1_modules = LEARNING_PATH["phase_1"]["modules"]
-    
-    # STATISTICS FOUNDATIONS (collapsible section)
+    # STATISTICS FOUNDATIONS
     with st.sidebar.expander("STATISTICS FOUNDATIONS", expanded=True):
         stats_options = []
         for module in phase1_modules[:4]:
             is_completed = module.id in st.session_state.completed_modules
-            if is_completed:
-                stats_options.append(f"✓ {module.title}")
-            else:
-                stats_options.append(module.title)
+            stats_options.append(module.title if not is_completed else f"✓ {module.title}")
         
         stats_selected = st.radio(
             "stats_modules",
@@ -377,15 +374,12 @@ def render_enhanced_sidebar():
             key="nav_stats"
         )
     
-    # DISTRIBUTIONS & PROBABILITY (collapsible section)
+    # DISTRIBUTIONS & PROBABILITY
     with st.sidebar.expander("DISTRIBUTIONS & PROBABILITY", expanded=True):
         dist_options = []
         for module in phase1_modules[4:]:
             is_completed = module.id in st.session_state.completed_modules
-            if is_completed:
-                dist_options.append(f"✓ {module.title}")
-            else:
-                dist_options.append(module.title)
+            dist_options.append(module.title if not is_completed else f"✓ {module.title}")
         
         dist_selected = st.radio(
             "dist_modules",
@@ -397,14 +391,13 @@ def render_enhanced_sidebar():
     # Determine selected page
     selected = main_nav_selected
     
-    # Footer info with real progress
+    # Minimal progress indicator
     st.sidebar.divider()
     total_progress = calculate_total_progress(st.session_state.completed_modules)
+    completed = len(st.session_state.completed_modules)
     
-    with st.sidebar.expander("PROGRESS", expanded=False):
-        st.progress(total_progress / 100, text=f"{total_progress:.0f}% Complete")
-        completed = len(st.session_state.completed_modules)
-        st.caption(f"{completed} of 7 modules completed")
+    st.sidebar.caption(f"Progress: {completed}/7 modules • {total_progress:.0f}%")
+    st.sidebar.progress(total_progress / 100)
     
     # Parse and return clean page name
     if selected in ["Home", "Welcome", "Learning Path", "About"]:
