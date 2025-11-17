@@ -45,7 +45,7 @@ def create_two_column_layout(title, icon=None, module_id=None):
                     difficulty_badge = module.get_difficulty_badge()
                     difficulty_text = module.difficulty
                     
-                    col_badge, col_btn = st.columns([1, 2])
+                    col_badge, col_btn, col_spacer = st.columns([1, 3, 1])
                     with col_badge:
                         st.markdown(f"""
                             <div style='
@@ -57,7 +57,7 @@ def create_two_column_layout(title, icon=None, module_id=None):
                             </div>
                         """, unsafe_allow_html=True)
                     with col_btn:
-                        if st.button("Mark Complete", key=f"complete_{module_id}", use_container_width=True):
+                        if st.button("Mark Complete", key=f"complete_{module_id}"):
                             st.session_state.completed_modules.add(module_id)
                             st.success("🎉 Great job!")
                             st.rerun()
