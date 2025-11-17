@@ -28,9 +28,9 @@ class Theme:
         """CSS for individual explorer pages"""
         return f"""
         <style>
-        /* Hide Streamlit default navigation */
+        /* Show Streamlit default navigation */
         [data-testid="stSidebarNav"] {{
-            display: none;
+            display: block;
         }}
         
         .main {{
@@ -59,9 +59,9 @@ class Theme:
         """CSS for home/landing page"""
         return f"""
         <style>
-        /* Hide Streamlit default navigation */
+        /* Show Streamlit default navigation */
         [data-testid="stSidebarNav"] {{
-            display: none;
+            display: block;
         }}
         
         .main {{

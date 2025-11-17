@@ -9,8 +9,7 @@ from utils.ui_components import (
     apply_page_config, 
     apply_theme, 
     render_hero_section, 
-    render_module_card,
-    render_enhanced_sidebar
+    render_module_card
 )
 
 # Apply theme
@@ -21,19 +20,8 @@ apply_page_config(
 )
 apply_theme(page_type="home")
 
-# Render enhanced sidebar navigation
-page = render_enhanced_sidebar()
-
-# PAGE: WELCOME
-if page == "Welcome":
-    st.switch_page("pages/welcome.py")
-
-# PAGE: LEARNING PATH
-elif page == "Learning Path":
-    st.switch_page("pages/learning_path.py")
-
-# PAGE: HOME
-elif page == "Home":
+# HOME PAGE
+if True:
     render_hero_section(
         "🤖 AI/ML Learning Hub",
         "Master fundamental ML & Statistics concepts through interactive visualizations"
@@ -137,79 +125,3 @@ elif page == "Home":
     5. **Learn by doing** - change parameters and predict outcomes
     """)
 
-# PAGE: MEAN EXPLORER
-elif page == "Mean Explorer":
-    st.switch_page("pages/mean_explorer.py")
-
-# PAGE: MEDIAN EXPLORER
-elif page == "Median Explorer":
-    st.switch_page("pages/median_explorer.py")
-
-# PAGE: MODE EXPLORER
-elif page == "Mode Explorer":
-    st.switch_page("pages/mode_explorer.py")
-
-# PAGE: VARIANCE VISUALIZER
-elif page == "Variance Visualizer":
-    st.switch_page("pages/variance_visualizer.py")
-
-# PAGE: DISTRIBUTION EXPLORER
-elif page == "Distribution Explorer":
-    st.switch_page("pages/distribution_explorer.py")
-
-# PAGE: CORRELATION EXPLORER
-elif page == "Correlation Explorer":
-    st.switch_page("pages/correlation_explorer.py")
-
-# PAGE: PROBABILITY EXPLORER
-elif page == "Probability Explorer":
-    st.switch_page("pages/probability_explorer.py")
-
-# PAGE: ABOUT
-elif page == "About":
-    st.title("About This Platform")
-    
-    st.write("""
-    ### 🎓 Educational Mission
-    
-    This AI/ML Learning Hub is designed to help beginners understand fundamental concepts in:
-    - **Statistics** - Mean, Median, Variance, Distributions
-    - **Data Analysis** - How to understand datasets
-    - **Machine Learning Foundations** - Why these concepts matter
-    
-    ### 🛠️ Tech Stack
-    
-    - **Frontend:** Streamlit (Python web framework)
-    - **Visualization:** Plotly (interactive charts)
-    - **Data:** NumPy, Pandas
-    - **Source:** Open-source and educational
-    
-    ### 📖 How It Works
-    
-    Each module features:
-    - ✅ **Interactive Controls** - Sliders, buttons, parameters
-    - ✅ **Real-time Visualizations** - See results instantly
-    - ✅ **Theory Explanations** - Learn concepts alongside experiments
-    - ✅ **Practical Examples** - Understand with real data
-    
-    ### 👨‍💼 Built By
-    
-    An AI/ML enthusiast passionate about making complex concepts accessible to everyone.
-    
-    ### 📝 Learning Path
-    
-    **Week 1:** Statistics Foundations (Current)
-    - ✅ Mean, Median, Mode
-    - ✅ Variance, Distributions
-    - ✅ Correlation & Covariance
-    
-    **Week 2:** Linear Regression (Coming Soon)
-    - How regression works, fitting lines to data
-    - Prediction and model evaluation
-    
-    **Week 3:** Classification (Coming Soon)
-    - Logistic regression, decision trees
-    
-    **Week 4+:** Advanced Topics (Roadmap)
-    - Clustering, Neural Networks, Deep Learning
-    """)
