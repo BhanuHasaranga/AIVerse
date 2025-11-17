@@ -35,19 +35,19 @@ class Theme:
         
         .main {{
             max-width: 100%;
-            padding-top: 0.5rem;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
+            padding-top: 5rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
         }}
         .block-container {{
-            padding-top: 1.5rem !important;
-            padding-left: 1rem !important;
-            padding-right: 1rem !important;
+            padding-top: 3rem !important;
+            padding-left: 2rem !important;
+            padding-right: 2rem !important;
             max-width: 100% !important;
         }}
         h1 {{
-            margin-top: 0 !important;
-            padding-top: 0 !important;
+            margin-top: 0rem !important;
+            padding-top: 0rem !important;
         }}
         [data-testid="stMetricContainer"] {{
             background-color: {Theme.METRIC_BG};

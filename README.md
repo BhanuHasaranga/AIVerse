@@ -63,6 +63,15 @@ Instead of passive reading, you:
 | **🔗 Correlation Explorer** | Analyze relationships with scatter plots | ✅ Live |
 | **🎲 Probability Explorer** | Master probability, Bayes' theorem, and random variables | ✅ Live |
 
+### **🔢 Phase 2: Linear Algebra for ML**
+
+| Module | Description | Status |
+|--------|-------------|--------|
+| **📍 Vectors & Operations** | Learn vectors, dot products, norms, and projections | ✅ Live |
+| **🔢 Matrices & Multiplication** | Understand matrices, operations, and transformations | ✅ Live |
+| **🔄 Determinants & Inverse** | Explore determinants, matrix inverse, and linear systems | ✅ Live |
+| **⚡ Eigenvalues & Eigenvectors** | Master eigenvalues, eigenvectors, diagonalization, and PCA | ✅ Live |
+
 ### **🎨 What Makes Each Module Special**
 
 - **Multiple Input Methods:** Generate random data, upload CSV, or enter manually
@@ -76,7 +85,18 @@ Instead of passive reading, you:
 
 ## 🗺️ **Roadmap: The Complete AI Learning Journey**
 
-### **Phase 1: Foundations** ✅ *Complete*
+### **Phase 1: Statistics Foundations** ✅ *Complete*
+- Mean, Median, Mode
+- Variance, Standard Deviation
+- Probability Distributions
+- Correlation & Covariance
+- Probability Basics
+
+### **Phase 2: Linear Algebra for ML** ✅ *Complete*
+- Vectors & Operations
+- Matrices & Multiplication
+- Determinants & Inverse
+- Eigenvalues & Eigenvectors
 - [x] Statistics fundamentals (mean, median, mode, variance)
 - [x] Correlation & covariance
 - [x] Probability distributions

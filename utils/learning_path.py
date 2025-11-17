@@ -126,7 +126,7 @@ LEARNING_PATH = {
     "phase_2": {
         "title": "Phase 2: Linear Algebra for ML",
         "description": "Master the mathematical foundations essential for machine learning",
-        "status": "coming_soon",
+        "status": "active",
         "modules": [
             # Vectors
             LearningModule(
@@ -138,7 +138,7 @@ LEARNING_PATH = {
                 topics=["Vectors", "Dot Product", "Norms", "Projections"],
                 estimated_time=30,
                 prerequisites=["probability"],
-                coming_soon=True
+                page_path="pages/vectors_explorer.py"
             ),
             # Matrices
             LearningModule(
@@ -150,7 +150,7 @@ LEARNING_PATH = {
                 topics=["Matrices", "Matrix Multiplication", "Transpose", "Identity"],
                 estimated_time=35,
                 prerequisites=["vectors"],
-                coming_soon=True
+                page_path="pages/matrices_explorer.py"
             ),
             # Determinants
             LearningModule(
@@ -162,7 +162,7 @@ LEARNING_PATH = {
                 topics=["Determinants", "Inverse Matrices", "Linear Systems"],
                 estimated_time=40,
                 prerequisites=["matrices"],
-                coming_soon=True
+                page_path="pages/determinants_explorer.py"
             ),
             # Eigenvalues
             LearningModule(
@@ -174,7 +174,7 @@ LEARNING_PATH = {
                 topics=["Eigenvalues", "Eigenvectors", "Diagonalization", "PCA"],
                 estimated_time=45,
                 prerequisites=["determinants"],
-                coming_soon=True
+                page_path="pages/eigenvalues_explorer.py"
             ),
         ]
     },
