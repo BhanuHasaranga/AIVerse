@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
 import streamlit as st
-from utils.ui_components import (
+from utils.ui import (
     apply_page_config, 
     apply_theme, 
     render_hero_section, 

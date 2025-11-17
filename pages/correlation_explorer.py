@@ -3,7 +3,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import streamlit as st
-from utils.ui_components import apply_page_config, apply_theme, create_two_column_layout, render_theory_panel
+from utils.ui import apply_page_config, apply_theme, create_two_column_layout, render_theory_panel
 from utils.chart_components import render_scatter_with_regression
 import pandas as pd
 import numpy as np

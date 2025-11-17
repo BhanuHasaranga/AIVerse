@@ -3,7 +3,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import streamlit as st
-from utils.ui_components import apply_page_config, apply_theme
+from utils.ui import apply_page_config, apply_theme
 
 # Apply theme
 apply_page_config(title="Welcome", icon="👋", sidebar_state="expanded")
