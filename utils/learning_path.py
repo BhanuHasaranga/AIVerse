@@ -124,7 +124,63 @@ LEARNING_PATH = {
     },
     
     "phase_2": {
-        "title": "Phase 2: Machine Learning Fundamentals",
+        "title": "Phase 2: Linear Algebra for ML",
+        "description": "Master the mathematical foundations essential for machine learning",
+        "status": "coming_soon",
+        "modules": [
+            # Vectors
+            LearningModule(
+                id="vectors",
+                title="Vectors & Operations",
+                icon="📍",
+                description="Learn about vectors, operations, dot products, and norms.",
+                difficulty="Intermediate",
+                topics=["Vectors", "Dot Product", "Norms", "Projections"],
+                estimated_time=30,
+                prerequisites=["probability"],
+                coming_soon=True
+            ),
+            # Matrices
+            LearningModule(
+                id="matrices",
+                title="Matrices & Multiplication",
+                icon="🔢",
+                description="Understand matrices, matrix operations, and multiplication.",
+                difficulty="Intermediate",
+                topics=["Matrices", "Matrix Multiplication", "Transpose", "Identity"],
+                estimated_time=35,
+                prerequisites=["vectors"],
+                coming_soon=True
+            ),
+            # Determinants
+            LearningModule(
+                id="determinants",
+                title="Determinants & Inverse",
+                icon="🔄",
+                description="Explore determinants, matrix inverse, and solving systems.",
+                difficulty="Advanced",
+                topics=["Determinants", "Inverse Matrices", "Linear Systems"],
+                estimated_time=40,
+                prerequisites=["matrices"],
+                coming_soon=True
+            ),
+            # Eigenvalues
+            LearningModule(
+                id="eigenvalues",
+                title="Eigenvalues & Eigenvectors",
+                icon="⚡",
+                description="Master eigenvalues, eigenvectors, and their ML applications.",
+                difficulty="Advanced",
+                topics=["Eigenvalues", "Eigenvectors", "Diagonalization", "PCA"],
+                estimated_time=45,
+                prerequisites=["determinants"],
+                coming_soon=True
+            ),
+        ]
+    },
+    
+    "phase_3": {
+        "title": "Phase 3: Machine Learning Fundamentals",
         "description": "Build your first ML models with supervised learning",
         "status": "coming_soon",
         "modules": [
@@ -136,7 +192,7 @@ LEARNING_PATH = {
                 difficulty="Intermediate",
                 topics=["Regression", "Prediction", "Loss Functions"],
                 estimated_time=35,
-                prerequisites=["correlation", "variance"],
+                prerequisites=["eigenvalues", "correlation"],
                 coming_soon=True
             ),
             LearningModule(
@@ -175,8 +231,8 @@ LEARNING_PATH = {
         ]
     },
     
-    "phase_3": {
-        "title": "Phase 3: Advanced ML & Deep Learning",
+    "phase_4": {
+        "title": "Phase 4: Advanced ML & Deep Learning",
         "description": "Master complex algorithms and neural networks",
         "status": "planned",
         "modules": [
