@@ -19,7 +19,7 @@ class Theme:
     
     # Spacing
     PADDING_CARD = "1.5rem"
-    PADDING_PAGE = "1rem"
+    PADDING_PAGE = "0.5rem"
     BORDER_RADIUS = "8px"
     BORDER_RADIUS_LARGE = "10px"
     
@@ -35,12 +35,15 @@ class Theme:
         
         .main {{
             max-width: 100%;
-            padding-top: 1rem;
-            padding-left: {Theme.PADDING_PAGE};
-            padding-right: {Theme.PADDING_PAGE};
+            padding-top: 0.5rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
         }}
         .block-container {{
-            padding-top: 2rem !important;
+            padding-top: 1.5rem !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+            max-width: 100% !important;
         }}
         h1 {{
             margin-top: 0 !important;
@@ -65,7 +68,14 @@ class Theme:
         }}
         
         .main {{
-            padding-top: 2rem;
+            padding-top: 1rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }}
+        .block-container {{
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+            max-width: 100% !important;
         }}
         .hero-section {{
             background: {Theme.GRADIENT};
