@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  aiml-learning:
+    build: .
+    container_name: aiml-learning-app
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    environment:
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_SERVER_RUNONCX_INITIAL_STATE=client
+      - STREAMLIT_LOGGER_LEVEL=info
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  default:
+    name: aiml-network
