@@ -144,7 +144,7 @@ with col2:
             "Concept": ["Mean", "Median", "Mode"],
             "Best For": ["Numeric", "Numeric (skewed)", "Categorical"]
         }
-        st.dataframe(pd.DataFrame(data), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(data), width='stretch', hide_index=True)
         
         st.write("### When to Use Mode")
         st.write("""

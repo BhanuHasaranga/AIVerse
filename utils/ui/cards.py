@@ -26,7 +26,7 @@ def render_module_card(title, description, topics, button_text, page_path, icon=
         </div>
     """, unsafe_allow_html=True)
     
-    if st.button(button_text, use_container_width=True, key=f"btn_{page_path}"):
+    if st.button(button_text, width='stretch', key=f"btn_{page_path}"):
         st.switch_page(page_path)
 
 

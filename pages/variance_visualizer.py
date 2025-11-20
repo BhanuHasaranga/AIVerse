@@ -151,7 +151,7 @@ with col1:
         fig.add_vline(x=mean_val + std_dev, line_dash="dot", line_color="orange",
                      annotation_text=f"μ + σ", annotation_position="top left")
         
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         
         # Visualize the 68-95-99.7 rule
         st.write("### Standard Deviation Rule (68-95-99.7)")
@@ -307,7 +307,7 @@ with col2:
         }
         
         summary_df = pd.DataFrame(summary_data)
-        st.dataframe(summary_df, use_container_width=True, hide_index=True)
+        st.dataframe(summary_df, width='stretch', hide_index=True)
         
         st.write("### Why It Matters")
         st.write("""

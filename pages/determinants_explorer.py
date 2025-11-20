@@ -45,7 +45,7 @@ with col1:
             A = np.array([[a11, a12], [a21, a22]])
             
             st.write("**Matrix A:**")
-            st.dataframe(pd.DataFrame(A), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(A), width='stretch', hide_index=True)
             
             det = np.linalg.det(A)
             st.metric("Determinant", f"{det:.2f}")
@@ -76,7 +76,7 @@ with col1:
             A = np.array([[a11, a12, a13], [a21, a22, a23], [a31, a32, a33]])
             
             st.write("**Matrix A:**")
-            st.dataframe(pd.DataFrame(A), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(A), width='stretch', hide_index=True)
             
             det = np.linalg.det(A)
             st.metric("Determinant", f"{det:.2f}")
@@ -150,7 +150,7 @@ with col1:
             yaxis=dict(range=[-5, 10], zeroline=True),
             height=400
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with det_tab3:
         st.write("### Matrix Inverse")
@@ -170,7 +170,7 @@ with col1:
             A = np.array([[a11, a12], [a21, a22]])
             
             st.write("**Matrix A:**")
-            st.dataframe(pd.DataFrame(A), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(A), width='stretch', hide_index=True)
             
             det = np.linalg.det(A)
             
@@ -179,12 +179,12 @@ with col1:
             else:
                 A_inv = np.linalg.inv(A)
                 st.write("**A⁻¹ (Inverse):**")
-                st.dataframe(pd.DataFrame(A_inv), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(A_inv), width='stretch', hide_index=True)
                 
                 # Verify
                 I = np.dot(A, A_inv)
                 st.write("**Verification: A × A⁻¹ = I (Identity):**")
-                st.dataframe(pd.DataFrame(I), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(I), width='stretch', hide_index=True)
                 
                 with st.expander("Formula for 2×2 Inverse"):
                     st.write("**For 2×2 matrix:**")
@@ -374,7 +374,7 @@ if det(H) > 0 and H[0,0] > 0:
         }
         
         summary_df = pd.DataFrame(summary_data)
-        st.dataframe(summary_df, use_container_width=True, hide_index=True)
+        st.dataframe(summary_df, width='stretch', hide_index=True)
         
         st.write("### Determinant Rules")
         st.write("""

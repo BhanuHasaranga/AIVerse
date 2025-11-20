@@ -46,7 +46,7 @@ with col1:
             A = np.array([[a11, a12], [a21, a22]])
             
             st.write("**Matrix A:**")
-            st.dataframe(pd.DataFrame(A), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(A), width='stretch', hide_index=True)
             
             # Special matrices
             st.write("### Special Matrices")
@@ -55,17 +55,17 @@ with col1:
             with col_id:
                 I = np.eye(2)
                 st.write("**Identity:**")
-                st.dataframe(pd.DataFrame(I), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(I), width='stretch', hide_index=True)
             
             with col_zero:
                 Z = np.zeros((2, 2))
                 st.write("**Zero:**")
-                st.dataframe(pd.DataFrame(Z), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(Z), width='stretch', hide_index=True)
             
             with col_trans:
                 A_T = A.T
                 st.write("**Aᵀ (Transpose):**")
-                st.dataframe(pd.DataFrame(A_T), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(A_T), width='stretch', hide_index=True)
         
         else:  # 3x3
             st.write("**Enter Matrix A:**")
@@ -86,7 +86,7 @@ with col1:
             A = np.array([[a11, a12, a13], [a21, a22, a23], [a31, a32, a33]])
             
             st.write("**Matrix A:**")
-            st.dataframe(pd.DataFrame(A), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(A), width='stretch', hide_index=True)
     
     with mat_tab2:
         st.write("### Matrix Operations")
@@ -127,7 +127,7 @@ with col1:
                 result = A - B
                 st.write("**A - B:**")
             
-            st.dataframe(pd.DataFrame(result), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(result), width='stretch', hide_index=True)
     
     with mat_tab3:
         st.write("### Matrix Multiplication")
@@ -165,7 +165,7 @@ with col1:
             result = np.dot(A, B)
             
             st.write("**Result (A × B):**")
-            st.dataframe(pd.DataFrame(result), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(result), width='stretch', hide_index=True)
             
             # Step-by-step
             with st.expander("Step-by-Step Calculation"):
@@ -220,7 +220,7 @@ with col1:
                 T = np.array([[0, 1], [1, 0]])
             st.write(f"**Reflection Matrix ({axis}):**")
         
-        st.dataframe(pd.DataFrame(T), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(T), width='stretch', hide_index=True)
         
         # Apply transformation
         v_transformed = np.dot(T, v)
@@ -249,7 +249,7 @@ with col1:
             yaxis=dict(range=[-5, 5], zeroline=True),
             height=400
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
 # RIGHT COLUMN
 with col2:
@@ -342,7 +342,7 @@ with col2:
         }
         
         summary_df = pd.DataFrame(summary_data)
-        st.dataframe(summary_df, use_container_width=True, hide_index=True)
+        st.dataframe(summary_df, width='stretch', hide_index=True)
         
         st.write("### Next Steps")
         st.write("""

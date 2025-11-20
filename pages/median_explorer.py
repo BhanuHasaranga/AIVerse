@@ -136,7 +136,7 @@ with col2:
                 "Resists outliers"
             ]
         }
-        st.dataframe(pd.DataFrame(data), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(data), width='stretch', hide_index=True)
         
         st.write("### Mean vs Median")
         comp = {
@@ -144,7 +144,7 @@ with col2:
             "Mean": ["• Yes", "Normal distributions"],
             "Median": ["• No", "Skewed distributions"]
         }
-        st.dataframe(pd.DataFrame(comp), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(comp), width='stretch', hide_index=True)
     
     render_theory_panel({
         "Definition": definition,

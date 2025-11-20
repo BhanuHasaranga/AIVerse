@@ -43,11 +43,15 @@ with col1:
         A = np.array([[a11, a12], [a21, a22]])
         
         st.write("**Matrix A:**")
-        st.dataframe(pd.DataFrame(A), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(A), width='stretch', hide_index=True)
         
         if st.button("Calculate Eigenvalues & Eigenvectors"):
             try:
                 eigenvalues, eigenvectors = eig(A)
+                
+                # Convert complex values to real
+                eigenvalues = np.real(eigenvalues)
+                eigenvectors = np.real(eigenvectors)
                 
                 st.write("### Results")
                 
@@ -99,6 +103,10 @@ with col1:
         try:
             eigenvalues, eigenvectors = eig(A)
             
+            # Convert complex values to real
+            eigenvalues = np.real(eigenvalues)
+            eigenvectors = np.real(eigenvectors)
+            
             # Visualize
             fig = go.Figure()
             
@@ -131,7 +139,7 @@ with col1:
                 yaxis=dict(range=[-5, 5], zeroline=True),
                 height=400
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
             
             st.write("**Key Insight:**")
             st.write("Eigenvectors only get scaled by their eigenvalues, direction stays the same!")
@@ -159,6 +167,10 @@ with col1:
             try:
                 eigenvalues, eigenvectors = eig(A)
                 
+                # Convert complex values to real
+                eigenvalues = np.real(eigenvalues)
+                eigenvectors = np.real(eigenvectors)
+                
                 # P = matrix of eigenvectors
                 P = eigenvectors
                 
@@ -169,21 +181,21 @@ with col1:
                 P_inv = np.linalg.inv(P)
                 
                 st.write("**Matrix A:**")
-                st.dataframe(pd.DataFrame(A), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(A), width='stretch', hide_index=True)
                 
                 st.write("**P (Eigenvectors):**")
-                st.dataframe(pd.DataFrame(P), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(P), width='stretch', hide_index=True)
                 
                 st.write("**D (Eigenvalues on diagonal):**")
-                st.dataframe(pd.DataFrame(D), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(D), width='stretch', hide_index=True)
                 
                 st.write("**P⁻¹:**")
-                st.dataframe(pd.DataFrame(P_inv), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(P_inv), width='stretch', hide_index=True)
                 
                 # Verify: A = PDP⁻¹
                 reconstructed = np.dot(np.dot(P, D), P_inv)
                 st.write("**Verification: PDP⁻¹ = A**")
-                st.dataframe(pd.DataFrame(reconstructed), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(reconstructed), width='stretch', hide_index=True)
                 
                 if np.allclose(reconstructed, A):
                     st.success("✅ Diagonalization verified!")
@@ -212,10 +224,14 @@ with col1:
         cov_matrix = np.cov(data_centered.T)
         
         st.write("**Covariance Matrix:**")
-        st.dataframe(pd.DataFrame(cov_matrix), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(cov_matrix), width='stretch', hide_index=True)
         
         # Calculate eigenvalues/eigenvectors
         eigenvalues, eigenvectors = eig(cov_matrix)
+        
+        # Convert complex values to real (for symmetric matrices, imaginary parts are negligible)
+        eigenvalues = np.real(eigenvalues)
+        eigenvectors = np.real(eigenvectors)
         
         # Sort by eigenvalue (descending)
         idx = eigenvalues.argsort()[::-1]
@@ -256,7 +272,7 @@ with col1:
             yaxis=dict(zeroline=True),
             height=500
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         
         st.write("**Key Insight:**")
         st.write("PC1 (red) = direction of maximum variance")
@@ -357,7 +373,7 @@ with col2:
         }
         
         summary_df = pd.DataFrame(summary_data)
-        st.dataframe(summary_df, use_container_width=True, hide_index=True)
+        st.dataframe(summary_df, width='stretch', hide_index=True)
         
         st.write("### Next Steps")
         st.write("""

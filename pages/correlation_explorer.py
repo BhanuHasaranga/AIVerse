@@ -106,7 +106,7 @@ with col1:
         st.write(f"**Data points:** {len(data)}")
         
         with st.expander(f"Dataset ({len(data)} pairs)", expanded=False):
-            st.dataframe(data, use_container_width=True)
+            st.dataframe(data, width='stretch')
         
         # Calculate statistics
         x_mean, y_mean = data['X'].mean(), data['Y'].mean()
@@ -220,7 +220,7 @@ with col2:
             "Meaning": ["Direction", "Strength"],
             "Range": ["-∞ to +∞", "-1 to +1"]
         }
-        st.dataframe(pd.DataFrame(data), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(data), width='stretch', hide_index=True)
         
         st.write("### Strength Guide")
         st.write("""

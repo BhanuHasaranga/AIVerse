@@ -66,7 +66,7 @@ with col1:
                 showlegend=True,
                 height=400
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
             
             st.write(f"**Vector v₁:** ({v1[0]:.2f}, {v1[1]:.2f})")
             magnitude = np.linalg.norm(v1)
@@ -105,7 +105,7 @@ with col1:
                 ),
                 height=500
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
             
             st.write(f"**Vector v₁:** ({v1[0]:.2f}, {v1[1]:.2f}, {v1[2]:.2f})")
             magnitude = np.linalg.norm(v1)
@@ -161,7 +161,7 @@ with col1:
                 yaxis=dict(range=[-10, 10], zeroline=True),
                 height=400
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
     
     with vec_tab3:
         st.write("### Dot Product")
@@ -205,7 +205,7 @@ with col1:
             yaxis=dict(range=[-10, 10], zeroline=True),
             height=400
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with vec_tab4:
         st.write("### Norms & Projections")
@@ -234,7 +234,9 @@ with col1:
         col_n2.metric("L₁ Norm (Manhattan)", f"{l1_norm:.2f}")
         col_n3.metric("L∞ Norm (Max)", f"{inf_norm:.2f}")
         
-        st.write(f"**L₂:** ||v₁||₂ = √(x² + y²) = √({v1[0]²:.2f} + {v1[1]²:.2f}) = {l2_norm:.2f}")
+        v1_sq_0 = v1[0]**2
+        v1_sq_1 = v1[1]**2
+        st.write(f"**L₂:** ||v₁||₂ = √(x² + y²) = √({v1_sq_0:.2f} + {v1_sq_1:.2f}) = {l2_norm:.2f}")
         st.write(f"**L₁:** ||v₁||₁ = |x| + |y| = |{v1[0]}| + |{v1[1]}| = {l1_norm:.2f}")
         st.write(f"**L∞:** ||v₁||∞ = max(|x|, |y|) = max(|{v1[0]}|, |{v1[1]}|) = {inf_norm:.2f}")
         
@@ -258,7 +260,7 @@ with col1:
                 yaxis=dict(range=[-10, 10], zeroline=True),
                 height=400
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
         else:
             st.warning("v₂ must be non-zero for projection")
 
@@ -362,7 +364,7 @@ with col2:
         }
         
         summary_df = pd.DataFrame(summary_data)
-        st.dataframe(summary_df, use_container_width=True, hide_index=True)
+        st.dataframe(summary_df, width='stretch', hide_index=True)
         
         st.write("### Next Steps")
         st.write("""

@@ -113,13 +113,13 @@ for phase_key, phase_data in LEARNING_PATH.items():
                 
                 # Action button
                 if not module.coming_soon and prerequisites_met and not is_completed:
-                    if st.button("Start Learning", key=f"start_{module.id}", use_container_width=True):
+                    if st.button("Start Learning", key=f"start_{module.id}", width='stretch'):
                         st.switch_page(module.page_path)
                 elif is_completed:
-                    if st.button("Review", key=f"review_{module.id}", use_container_width=True):
+                    if st.button("Review", key=f"review_{module.id}", width='stretch'):
                         st.switch_page(module.page_path)
                 elif not prerequisites_met:
-                    st.button("Locked", key=f"locked_{module.id}", disabled=True, use_container_width=True)
+                    st.button("Locked", key=f"locked_{module.id}", disabled=True, width='stretch')
             
             if idx < len(phase_data["modules"]) - 1:
                 st.write("↓")

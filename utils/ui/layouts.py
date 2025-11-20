@@ -38,7 +38,7 @@ def create_two_column_layout(title, icon=None, module_id=None):
     #             
     #             if is_completed:
     #                 st.success("✅ Completed")
-    #                 if st.button("Mark Incomplete", key=f"uncomplete_{module_id}", use_container_width=True):
+    #                 if st.button("Mark Incomplete", key=f"uncomplete_{module_id}", width='stretch'):
     #                     st.session_state.completed_modules.discard(module_id)
     #                     st.rerun()
     #             else:

@@ -66,7 +66,7 @@ with col1:
                 yaxis_title="Count",
                 showlegend=False
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
             
             # Show convergence to 0.5
             st.write("**Convergence to Theoretical Probability:**")
@@ -86,7 +86,7 @@ with col1:
                 xaxis_title="Number of Flips",
                 yaxis_title="P(Heads)"
             )
-            st.plotly_chart(fig_conv, use_container_width=True)
+            st.plotly_chart(fig_conv, width='stretch')
         
         st.write("---")
         
@@ -107,14 +107,14 @@ with col1:
                 'Count': counts,
                 'Probability': probs
             })
-            st.dataframe(df_dice, use_container_width=True, hide_index=True)
+            st.dataframe(df_dice, width='stretch', hide_index=True)
             
             # Visualize
             fig = px.bar(df_dice, x='Face', y='Count', 
                         title="Dice Roll Distribution")
             fig.add_hline(y=num_rolls/6, line_dash="dash", line_color="red",
                          annotation_text="Expected (uniform)")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
     
     # TAB 2: Conditional Probability
     with prob_tab2:
@@ -176,7 +176,7 @@ with col1:
         fig = px.bar(df_confusion, x='Test Result', y='Probability', 
                     color='Actual', barmode='stack',
                     title="Probability Distribution")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         
         # Explanation
         with st.expander("📐 Formula Explanation"):
@@ -241,7 +241,7 @@ P(Disease|Test+) = ({sensitivity:.3f} × {p_disease:.3f}) / {p_test_pos:.3f}
             yaxis_title="Probability",
             showlegend=False
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         
         # Show calculation
         with st.expander("Step-by-Step Calculation"):
@@ -294,7 +294,7 @@ P(Disease|Test+) = ({sensitivity:.3f} × {p_disease:.3f}) / {p_test_pos:.3f}
                 xaxis_title="Number of Successes (k)",
                 yaxis_title="P(X = k)"
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
         
         elif dist_type == "Discrete: Poisson":
             st.write("**Poisson Distribution: Events occurring in fixed interval**")
@@ -319,7 +319,7 @@ P(Disease|Test+) = ({sensitivity:.3f} × {p_disease:.3f}) / {p_test_pos:.3f}
                 xaxis_title="Number of Events (k)",
                 yaxis_title="P(X = k)"
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
         
         elif dist_type == "Continuous: Normal":
             st.write("**Normal (Gaussian) Distribution**")
@@ -350,7 +350,7 @@ P(Disease|Test+) = ({sensitivity:.3f} × {p_disease:.3f}) / {p_test_pos:.3f}
                 xaxis_title="x",
                 yaxis_title="f(x)"
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
         
         else:  # Exponential
             st.write("**Exponential Distribution: Time between events**")
@@ -380,7 +380,7 @@ P(Disease|Test+) = ({sensitivity:.3f} × {p_disease:.3f}) / {p_test_pos:.3f}
                 xaxis_title="x",
                 yaxis_title="f(x)"
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
 
 # RIGHT COLUMN
 with col2:
@@ -444,7 +444,7 @@ with col2:
             "Formula": ["P(A)", "P(A|B)", "P(A|B) = ...", "E[X], Var(X)"],
             "Use": ["Likelihood", "Given info", "Update beliefs", "Distributions"]
         }
-        st.dataframe(pd.DataFrame(data), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(data), width='stretch', hide_index=True)
         
         st.write("### Key Insights")
         st.write("""

@@ -31,7 +31,7 @@ def render_histogram_with_line(data, line_value, line_label, title="Histogram of
         annotation_text=line_label,
         annotation_position="top right"
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 
 def render_frequency_bar_chart(freq_data, highlight_values=None, title="Frequency Distribution"):
@@ -59,7 +59,7 @@ def render_frequency_bar_chart(freq_data, highlight_values=None, title="Frequenc
                  for val in freq_data["Value"]]
         fig.update_traces(marker_color=colors)
     
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 
 def render_scatter_with_regression(data, x_col="X", y_col="Y", correlation=None):
@@ -100,7 +100,7 @@ def render_scatter_with_regression(data, x_col="X", y_col="Y", correlation=None)
     ))
     
     fig.update_layout(hovermode='closest')
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 
 def render_distribution_chart(data, dist_type="histogram", title="Distribution"):
@@ -127,7 +127,7 @@ def render_distribution_chart(data, dist_type="histogram", title="Distribution")
     else:
         fig = px.histogram(df, x="Values", title=title)
     
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 
 def render_comparison_chart(values_dict, chart_type="bar", title="Comparison"):
@@ -150,5 +150,5 @@ def render_comparison_chart(values_dict, chart_type="bar", title="Comparison"):
             for k, v in values_dict.items()
         ])
         fig = px.bar(df, x="Metric", y="Value", title=title)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 

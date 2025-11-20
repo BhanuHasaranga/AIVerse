@@ -93,15 +93,10 @@ Instead of passive reading, you:
 - Probability Basics
 
 ### **Phase 2: Linear Algebra for ML** ✅ *Complete*
-- Vectors & Operations
-- Matrices & Multiplication
-- Determinants & Inverse
-- Eigenvalues & Eigenvectors
-- [x] Statistics fundamentals (mean, median, mode, variance)
-- [x] Correlation & covariance
-- [x] Probability distributions
-- [x] Probability theory (basics, conditional, Bayes' theorem)
-- [x] Random variables (discrete & continuous distributions)
+- Vectors & Operations (dot product, norms, projections)
+- Matrices & Multiplication (operations, transformations)
+- Determinants & Inverse (geometric meaning, linear systems)
+- Eigenvalues & Eigenvectors (diagonalization, PCA)
 
 ### **Phase 2: Machine Learning Basics** 🚧 *In Progress*
 - [ ] Linear Regression visualizer

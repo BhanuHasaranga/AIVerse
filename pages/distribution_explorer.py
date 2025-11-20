@@ -90,7 +90,7 @@ with col1:
                      fillcolor="blue", opacity=0.1, line_width=0,
                      annotation_text="±1σ (68%)", annotation_position="top")
     
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
     
     # Skewness & Kurtosis explanation
     st.write("### Distribution Characteristics")
@@ -274,7 +274,7 @@ with col2:
         }
         
         summary_df = pd.DataFrame(summary_data)
-        st.dataframe(summary_df, use_container_width=True, hide_index=True)
+        st.dataframe(summary_df, width='stretch', hide_index=True)
         
         st.write("### Key Takeaway")
         st.write("""

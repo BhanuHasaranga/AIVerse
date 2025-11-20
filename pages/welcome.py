@@ -176,11 +176,11 @@ with col2:
     col_btn1, col_btn2 = st.columns(2)
     
     with col_btn1:
-        if st.button("📚 View Learning Path", use_container_width=True, type="primary"):
+        if st.button("📚 View Learning Path", width='stretch', type="primary"):
             st.switch_page("pages/learning_path.py")
     
     with col_btn2:
-        if st.button("🚀 Jump to Home", use_container_width=True):
+        if st.button("🚀 Jump to Home", width='stretch'):
             st.switch_page("main.py")
 
 st.divider()
